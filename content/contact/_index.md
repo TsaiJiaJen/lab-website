@@ -19,20 +19,3 @@ reading_time: false
 Email：swchang@mail.dyu.edu.tw
 
 ---
-
-<div style="margin-top:20px;">
-  <a href="mailto:swchang@mail.dyu.edu.tw"
-     style="padding:10px 16px; background:#1f4e79; color:white; border-radius:6px; text-decoration:none; margin-right:8px;">
-     📧 寫信聯絡
-  </a>
-
-  <a href="/#members"
-     style="padding:10px 16px; background:#444; color:white; border-radius:6px; text-decoration:none; margin-right:8px;">
-     👩‍🔬 查看成員
-  </a>
-
-  <a href="/#publications"
-     style="padding:10px 16px; background:#222; color:white; border-radius:6px; text-decoration:none;">
-     📄 研究成果
-  </a>
-</div>
