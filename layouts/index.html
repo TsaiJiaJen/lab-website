@@ -1,24 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>{{ .Site.Title }}</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.6;
+    }
+
+    nav a {
+      margin-right: 15px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
+
 <body>
 
-  <h1>{{ .Site.Title }}</h1>
+  <header>
+    <h1>{{ .Site.Title }}</h1>
 
-  <nav>
-    <a href="/about/">About</a>
-    <a href="/members/">Members</a>
-    <a href="/courses/">Courses</a>
-    <a href="/photo/">Photo</a>
-    <a href="/contact/">Contact</a>
-  </nav>
+    <nav>
+      <a href="{{ "/" | relURL }}">Home</a>
+      <a href="{{ "/about/" | relURL }}">About</a>
+      <a href="{{ "/members/" | relURL }}">Members</a>
+      <a href="{{ "/courses/" | relURL }}">Courses</a>
+      <a href="{{ "/photo/" | relURL }}">Photo</a>
+      <a href="{{ "/contact/" | relURL }}">Contact</a>
+    </nav>
+  </header>
 
   <hr>
 
-  {{ .Content }}
+  <main>
+    {{ .Content }}
+  </main>
 
 </body>
 </html>
