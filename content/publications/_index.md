@@ -1,0 +1,53 @@
+---
+title: '張淑微老師實驗室'
+type: landing
+
+sections:
+
+  - block: markdown
+    content:
+      title: '酵素暨生技應用實驗室'
+      text: |
+        本網站為實驗室官方網站（內容持續建置中）
+
+        <div style="margin-top:20px;">
+          <a href="/#about" style="padding:10px 14px; background:#1f4e79; color:white; border-radius:6px; text-decoration:none; margin-right:8px;">About</a>
+
+          <a href="/#research" style="padding:10px 14px; background:#444; color:white; border-radius:6px; text-decoration:none; margin-right:8px;">Research</a>
+
+          <a href="/#members" style="padding:10px 14px; background:#666; color:white; border-radius:6px; text-decoration:none; margin-right:8px;">Members</a>
+
+          <a href="/#publications" style="padding:10px 14px; background:#222; color:white; border-radius:6px; text-decoration:none;">Publications</a>
+        </div>
+
+  - block: markdown
+    id: about
+    content:
+      title: "About"
+      text: "（內容待補）"
+
+  - block: markdown
+    id: research
+    content:
+      title: "Research"
+      text: "（內容待補）"
+
+  - block: markdown
+    id: members
+    content:
+      title: "Members"
+      text: "（內容待補）"
+
+  - block: markdown
+    id: publications
+    content:
+      title: "Publications"
+      text: "（內容待補）"
+
+  - block: markdown
+    id: contact
+    content:
+      title: "Contact"
+      text: "（內容待補）"
+
+---
