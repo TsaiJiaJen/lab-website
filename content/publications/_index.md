@@ -10,16 +10,6 @@ sections:
       text: |
         本網站為實驗室官方網站（內容持續建置中）
 
-        <div style="margin-top:20px;">
-          <a href="/#about" style="padding:10px 14px; background:#1f4e79; color:white; border-radius:6px; text-decoration:none; margin-right:8px;">About</a>
-
-          <a href="/#research" style="padding:10px 14px; background:#444; color:white; border-radius:6px; text-decoration:none; margin-right:8px;">Research</a>
-
-          <a href="/#members" style="padding:10px 14px; background:#666; color:white; border-radius:6px; text-decoration:none; margin-right:8px;">Members</a>
-
-          <a href="/#publications" style="padding:10px 14px; background:#222; color:white; border-radius:6px; text-decoration:none;">Publications</a>
-        </div>
-
   - block: markdown
     id: about
     content:
