@@ -1,0 +1,12 @@
+baseURL: "https://你的帳號.github.io/你的repo/"
+languageCode: "zh-tw"
+title: "My Lab Website"
+
+disableKinds:
+  - taxonomy
+  - term
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
