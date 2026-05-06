@@ -10,12 +10,6 @@ sections:
       text: |
         本實驗室包含在學學生與畢業校友，持續進行微生物與生技研究。
 
-        <div style="margin-top:20px;">
-          <a href="/#current" style="padding:10px 14px; background:#1f4e79; color:white; border-radius:6px; text-decoration:none; margin-right:8px;">在學成員</a>
-
-          <a href="/#alumni" style="padding:10px 14px; background:#555; color:white; border-radius:6px; text-decoration:none;">畢業成員</a>
-        </div>
-
   - block: collection
     id: current
     content:
