@@ -9,10 +9,19 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 40px;
+      margin: 0;
       line-height: 1.6;
-      opacity: 0;
-      transition: opacity 0.2s ease-in;
+    }
+
+    header {
+      padding: 40px;
+      background: #f5f5f5;
+    }
+
+    nav {
+      padding: 10px 40px;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
     }
 
     nav a {
@@ -21,34 +30,27 @@
       color: #333;
     }
 
-    nav a:hover {
-      text-decoration: underline;
+    main {
+      padding: 40px;
     }
   </style>
-
-  <script>
-    window.addEventListener("load", function () {
-      document.body.style.opacity = 1;
-    });
-  </script>
 </head>
 
 <body>
 
   <header>
     <h1>{{ .Site.Title }}</h1>
-
-    <nav>
-      <a href="{{ "/" | relURL }}">Home</a>
-      <a href="{{ "/about/" | relURL }}">About</a>
-      <a href="{{ "/members/" | relURL }}">Members</a>
-      <a href="{{ "/courses/" | relURL }}">Courses</a>
-      <a href="{{ "/photo/" | relURL }}">Photo</a>
-      <a href="{{ "/contact/" | relURL }}">Contact</a>
-    </nav>
+    <p>酵素暨生技應用實驗室</p>
   </header>
 
-  <hr>
+  <nav>
+    <a href="{{ "/" | relURL }}">Home</a>
+    <a href="{{ "/about/" | relURL }}">About</a>
+    <a href="{{ "/members/" | relURL }}">Members</a>
+    <a href="{{ "/courses/" | relURL }}">Courses</a>
+    <a href="{{ "/photo/" | relURL }}">Photo</a>
+    <a href="{{ "/contact/" | relURL }}">Contact</a>
+  </nav>
 
   <main>
     {{ .Content }}
