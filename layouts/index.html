@@ -4,56 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ .Site.Title }}</title>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-    }
-
-    header {
-      padding: 40px;
-      background: #f5f5f5;
-    }
-
-    nav {
-      padding: 10px 40px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    nav a {
-      margin-right: 15px;
-      text-decoration: none;
-    }
-
-    main {
-      padding: 40px;
-    }
-  </style>
 </head>
 
 <body>
 
   <header>
     <h1>{{ .Site.Title }}</h1>
-    <p>酵素暨生技應用實驗室</p>
   </header>
 
-  <nav>
-    <a href="{{ "/" | relURL }}">Home</a>
-    <a href="{{ "/about/" | relURL }}">About</a>
-    <a href="{{ "/members/" | relURL }}">Members</a>
-    <a href="{{ "/courses/" | relURL }}">Courses</a>
-    <a href="{{ "/photo/" | relURL }}">Photo</a>
-    <a href="{{ "/contact/" | relURL }}">Contact</a>
-  </nav>
-
   <main>
-    {{ with .Content }}
-      {{ . }}
-    {{ else }}
-      <p>歡迎來到實驗室網站</p>
-    {{ end }}
+    {{ .Content }}
   </main>
 
 </body>
