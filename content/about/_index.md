@@ -9,16 +9,6 @@ reading_time: false
 我們致力於結合微生物發酵、天然物萃取與生物製程技術，
 開發應用於食品、保健與美妝產業之高值化產品。
 
-<br>
-
-<div style="margin-top:20px; margin-bottom:30px;">
-  <a href="/#research" style="padding:10px 16px; background:#1f4e79; color:white; border-radius:6px; margin-right:10px; text-decoration:none;">研究方向</a>
-
-  <a href="/#members" style="padding:10px 16px; background:#444; color:white; border-radius:6px; margin-right:10px; text-decoration:none;">實驗室成員</a>
-
-  <a href="/#publications" style="padding:10px 16px; background:#666; color:white; border-radius:6px; text-decoration:none;">研究成果</a>
-</div>
-
 ---
 
 ## 🔬 研究方向 Research Areas
