@@ -1,12 +1,38 @@
-baseURL: "https://你的帳號.github.io/你的repo/"
-languageCode: "zh-tw"
-title: "My Lab Website"
+# ======================
+# SITE
+# ======================
+title: '張淑微 老師 Lab'
+baseURL: 'https://你的帳號.github.io/你的repo/'
 
-disableKinds:
-  - taxonomy
-  - term
+languageCode: 'zh-tw'
+defaultContentLanguage: 'zh'
+hasCJKLanguage: true
 
+# ======================
+# BUILD
+# ======================
+enableEmoji: true
+enableRobotsTXT: true
+summaryLength: 30
+timeout: 600000
+
+# ======================
+# TAXONOMY
+# ======================
+taxonomies:
+  tag: tags
+  category: categories
+
+# ======================
+# OUTPUTS（GitHub Pages 必要）
+# ======================
+outputs:
+  home: [HTML, RSS]
+  section: [HTML, RSS]
+
+# ======================
+# MARKUP
+# ======================
 markup:
-  goldmark:
-    renderer:
-      unsafe: true
+  highlight:
+    lineNos: false
