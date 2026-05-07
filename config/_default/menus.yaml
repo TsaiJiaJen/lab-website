@@ -3,20 +3,20 @@ main:
     url: /
     weight: 10
   - name: About 
-    url: /about/
+    url: "about"
     weight: 11
   - name: Publications 
-    url: /publications/
+    url: "publications"
     weight: 12
   - name: Courses 
-    url: /courses/
+    url: "courses"
     weight: 13
   - name: Members 
-    url: /members/
+    url: "members"
     weight: 14
   - name: Contact 
-    url: /contact/
+    url: "contact"
     weight: 15
   - name: Photo 
-    url: /photo/
+    url: "photo"
     weight: 16
