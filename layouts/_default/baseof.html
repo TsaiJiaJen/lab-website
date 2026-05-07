@@ -86,50 +86,16 @@
 
   <main>
     {{/* 1. 決定圖片 URL 與高度 */}}
-    {{/* 預設圖：首頁紫色液體 */}}
+    {{/* 預設圖 */}}
     {{ $bg := "https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600" }}
     {{ $padding := "140px 20px" }}
     
+    {{/* 加強版判斷：同時檢查路徑與標題 */}}
     {{ $url := .RelPermalink | lower }}
+    {{ $title := .Title | lower }}
 
     {{ if .IsHome }}
         {{ $padding = "160px 20px" }}
-    {{ else if in $url "about" }}
-        {{/* About 換成：實驗室藍色液體與燒瓶，這張連結非常穩定 */}}
-        {{ $bg = "https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=1600" }}
-    {{ else if in $url "photo" }}
-        {{/* Photo：維持原本的藍色特寫 */}}
-        {{ $bg = "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1600" }}
-    {{ else if in $url "publications" }}
-        {{ $bg = "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1600" }}
-    {{ else if in $url "members" }}
-        {{ $bg = "https://images.unsplash.com/photo-1530210124550-912dc1381cb8?q=80&w=1600" }}
-    {{ else if in $url "courses" }}
-        {{ $bg = "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1600" }}
-    {{ else if in $url "contact" }}
-        {{ $bg = "https://images.unsplash.com/photo-1516387933999-eddd9e211833?q=80&w=1600" }}
-    {{ end }}
-
-    <section class="hero-banner {{ if .IsHome }}is-home-hero{{ end }}" 
-             style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ $bg | safeCSS }}'); padding: {{ $padding | safeCSS }};">
-        <div style="max-width: 1100px; width: 100%;">
-            {{ if .IsHome }}
-                <h1>酵素暨生技應用實驗室</h1>
-                <p style="color:white; margin-top:20px; opacity:0.9;">結合微生物發酵、天然物萃取與生物製程技術，致力於食品、保健與美妝產業之高值化應用。</p>
-            {{ else }}
-                <h1>{{ .Title }}</h1>
-            {{ end }}
-        </div>
-    </section>
-
-    <div class="container {{ if .IsHome }}home-style{{ else }}sub-page-container{{ end }}">
-        {{ block "main" . }}{{ end }}
-    </div>
-  </main>
-
-  <footer>
-    &copy; {{ now.Format "2006" }} {{ .Site.Title }} | All Rights Reserved
-  </footer>
-
-</body>
-</html>
+    {{ else if or (in $url "about") (in $title "about") (in $title "關於") }}
+        {{/* About 換成：高品質顯微鏡特寫 */}}
+        {{ $bg = "
