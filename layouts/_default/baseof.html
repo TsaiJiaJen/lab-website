@@ -99,41 +99,51 @@
     }
 
     /* 6. 首頁專屬樣式 (Home) */
+    /* 6. 首頁專屬樣式 (Home) */
     .hero {
       background: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)),
       url('https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600') center/cover;
       color: white;
-      padding: 80px 40px;
-      border-radius: 15px;
+      padding: 160px 40px; /* 增加上下間距，讓 Hero 變高變大 */
+      border-radius: 20px;
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 50px;
     }
-    .hero h1 { border: none; color: white; }
+    
+    .hero h1 { 
+      font-size: 3.5rem !important; /* 標題放大 */
+      border: none; 
+      color: white; 
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.4rem; /* 副標題放大 */
+      max-width: 800px;
+      margin: 0 auto;
+    }
 
     .research-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 卡片稍微加寬 */
+      gap: 30px; /* 間距加大 */
     }
+
     .research-item {
-      background: #f8fafc;
-      padding: 20px;
-      border-radius: 10px;
+      background: #ffffff; /* 卡片用純白 */
+      padding: 35px; /* 內距加大 */
+      border-radius: 15px;
       border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* 輕微陰影 */
     }
 
-    /* 7. 內頁專屬樣式 (About, Publications 等) */
-    .page-header { text-align: center; margin-bottom: 30px; }
-    .page-header h1 { border: none; }
-
-    /* 8. 頁尾 */
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: #999;
-      font-size: 0.85rem;
+    /* 讓首頁容器「隱形」的關鍵樣式 */
+    .container.home-style {
+      background-color: transparent !important;
+      box-shadow: none !important;
+      max-width: 1200px; /* 首頁內容可以更寬 */
+      padding: 0 20px; /* 移除原本白色大框的內距 */
     }
-
     /* 9. 手機版 */
     @media (max-width: 600px) {
       nav { flex-direction: column; gap: 15px; }
