@@ -12,6 +12,8 @@
       --primary-color: #2c3e50;
       --accent-color: #3498db;
       --text-color: #333;
+      /* 預設背景圖 */
+      --hero-bg: url('https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600');
     }
 
     body {
@@ -40,30 +42,103 @@
     .nav-links a { text-decoration: none; color: #666; transition: 0.3s; }
     .nav-links a:hover { color: var(--accent-color); }
 
-    /* 橫幅基礎樣式 */
+    /* 橫幅樣式 */
     .hero-banner {
-      background: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)),
-                  url('https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600') center/cover;
+      background: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)), var(--hero-bg) center/cover;
       color: white; text-align: center;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
       margin-top: 60px;
-      padding: 140px 20px; /* 內頁加大後的尺寸 */
+      padding: 140px 20px; /* 內頁高度 */
     }
 
-    /* 首頁特殊處理：維持原本高度與背景 */
-    .is-home-hero { 
-        padding: 160px 20px !important; 
-        background-image: linear-gradient(rgba(44,62,80,0.6), rgba(44,62,80,0.6)), 
-                          url('https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600') !important;
-    }
+    /* 首頁高度與字體大小 */
+    .is-home-hero { padding: 160px 20px !important; }
+    .is-home-hero h1 { font-size: 3.5rem !important; }
 
-    /* 各分頁專屬背景圖 - 強制替換 */
-    .hero-about { background-image: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)), url('https://images.unsplash.com/photo-1579154273151-09608b97240d?q=80&w=1600') !important; }
-    .hero-publications { background-image: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)), url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1600') !important; }
-    .hero-photo { background-image: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)), url('https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1600') !important; }
-    .hero-members { background-image: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)), url('https://images.unsplash.com/photo-1530210124550-912dc1381cb8?q=80&w=1600') !important; }
-    .hero-courses { background-image: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)), url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1600') !important; }
-    .hero-contact { background-image: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)), url('https://images.unsplash.com/photo-1516387933999-eddd9e211833?q=80&w=1600') !important; }
+    /* 各分頁專屬背景圖定義 */
+    .hero-about { --hero-bg: url('https://images.unsplash.com/photo-1579154273151-09608b97240d?q=80&w=1600'); }
+    .hero-publications { --hero-bg: url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1600'); }
+    .hero-photo { --hero-bg: url('https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1600'); }
+    .hero-members { --hero-bg: url('https://images.unsplash.com/photo-1530210124550-912dc1381cb8?q=80&w=1600'); }
+    .hero-courses { --hero-bg: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1600'); }
+    .hero-contact { --hero-bg: url('https://images.unsplash.com/photo-1516387933999-eddd9e211833?q=80&w=1600'); }
 
     .hero-banner h1 { 
-      font-size: 2.8rem; color: white !important; border
+      font-size: 2.8rem; color: white !important; border: none !important; margin: 0;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .hero-banner p { font-size: 1.2rem; max-width: 800px; margin: 20px auto 0; opacity: 0.9; }
+
+    .container {
+      max-width: 1100px; margin: -60px auto 50px;
+      padding: 40px 60px; background-color: #ffffff; border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1); min-height: 450px;
+      position: relative; z-index: 10; flex: 1;
+    }
+
+    .home-style { background-color: transparent !important; box-shadow: none !important; margin-top: 20px; padding: 0 20px; }
+    .sub-page h1:first-child { display: none; }
+
+    footer { text-align: center; padding: 40px; color: #666; }
+
+    @media (max-width: 600px) {
+      nav { flex-direction: column; gap: 15px; }
+      .container { width: 92%; padding: 25px; margin-top: -40px; }
+      .hero-banner { padding: 80px 20px; }
+    }
+</style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="{{ "/" | relURL }}" class="logo">{{ .Site.Title }}</a>
+      <div class="nav-links">
+        {{ range .Site.Menus.main }}
+        <a href="{{ .URL | relURL }}">{{ .Name }}</a>
+        {{ end }}
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    {{/* 預先計算類別名稱，避免在 HTML 標籤內寫複雜邏輯 */}}
+    {{ $h_class := "" }}
+    {{ $url := .RelPermalink | lower }}
+    
+    {{ if .IsHome }}
+      {{ $h_class = "is-home-hero" }}
+    {{ else if in $url "about" }}
+      {{ $h_class = "hero-about" }}
+    {{ else if in $url "publications" }}
+      {{ $h_class = "hero-publications" }}
+    {{ else if in $url "photo" }}
+      {{ $h_class = "hero-photo" }}
+    {{ else if in $url "members" }}
+      {{ $h_class = "hero-members" }}
+    {{ else if in $url "courses" }}
+      {{ $h_class = "hero-courses" }}
+    {{ else if in $url "contact" }}
+      {{ $h_class = "hero-contact" }}
+    {{ end }}
+
+    <section class="hero-banner {{ $h_class }}">
+        {{ if .IsHome }}
+            <h1>酵素暨生技應用實驗室</h1>
+            <p>結合微生物發酵、天然物萃取與生物製程技術，致力於食品、保健與美妝產業之高值化應用。</p>
+        {{ else }}
+            <h1>{{ .Title }}</h1>
+        {{ end }}
+    </section>
+
+    <div class="container {{ if .IsHome }}home-style{{ else }}sub-page{{ end }}">
+        {{ block "main" . }}{{ end }}
+    </div>
+  </main>
+
+  <footer>
+    &copy; {{ now.Format "2006" }} {{ .Site.Title }} | All Rights Reserved
+  </footer>
+
+</body>
+</html>
