@@ -39,7 +39,6 @@
     .nav-links a { text-decoration: none; color: #666; transition: 0.3s; }
     .nav-links a:hover { color: var(--accent-color); }
 
-    /* Hero Banner 基礎樣式 */
     .hero-banner {
       color: white; text-align: center;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -47,9 +46,6 @@
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
-      /* 使用 CSS 變數 */
-      background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), var(--hero-bg);
-      padding: var(--hero-padding);
     }
 
     .hero-banner h1 { 
@@ -89,25 +85,33 @@
   </header>
 
   <main>
-    {{/* 1. 計算圖片 URL 與 Padding */}}
+    {{/* 1. 決定圖片 URL 與高度 */}}
+    {{/* 預設圖：首頁紫色液體 */}}
     {{ $bg := "https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600" }}
-    {{ $pad := "140px 20px" }}
+    {{ $padding := "140px 20px" }}
     
     {{ $url := .RelPermalink | lower }}
 
     {{ if .IsHome }}
-      {{ $pad = "160px 20px" }}
+        {{ $padding = "160px 20px" }}
     {{ else if in $url "about" }}
-      {{ $bg = "https://images.unsplash.com/photo-1579154273151-09608b97240d?q=80&w=1600" }}
-    {{ else if in $url "contact" }}
-      {{ $bg = "https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=1600" }}
+        {{/* About 換成：實驗室藍色液體與燒瓶，這張連結非常穩定 */}}
+        {{ $bg = "https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=1600" }}
     {{ else if in $url "photo" }}
-      {{ $bg = "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1600" }}
+        {{/* Photo：維持原本的藍色特寫 */}}
+        {{ $bg = "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1600" }}
+    {{ else if in $url "publications" }}
+        {{ $bg = "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1600" }}
+    {{ else if in $url "members" }}
+        {{ $bg = "https://images.unsplash.com/photo-1530210124550-912dc1381cb8?q=80&w=1600" }}
+    {{ else if in $url "courses" }}
+        {{ $bg = "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1600" }}
+    {{ else if in $url "contact" }}
+        {{ $bg = "https://images.unsplash.com/photo-1516387933999-eddd9e211833?q=80&w=1600" }}
     {{ end }}
 
-    {{/* 2. 透過 CSS 變數傳遞給 Style 屬性 */}}
     <section class="hero-banner {{ if .IsHome }}is-home-hero{{ end }}" 
-             style='--hero-bg: url("{{ $bg | safeCSS }}"); --hero-padding: {{ $pad | safeCSS }};'>
+             style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ $bg | safeCSS }}'); padding: {{ $padding | safeCSS }};">
         <div style="max-width: 1100px; width: 100%;">
             {{ if .IsHome }}
                 <h1>酵素暨生技應用實驗室</h1>
