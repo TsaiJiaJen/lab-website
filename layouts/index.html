@@ -2,12 +2,26 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ .Site.Title }}</title>
 </head>
 
 <body>
 
-  <h1>{{ .Site.Title }}</h1>
+  <header>
+    <h1>{{ .Site.Title }}</h1>
+  </header>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about/">About</a>
+    <a href="/members/">Members</a>
+    <a href="/courses/">Courses</a>
+    <a href="/photo/">Photo</a>
+    <a href="/contact/">Contact</a>
+  </nav>
+
+  <hr>
 
   <main>
     {{ .Content }}
