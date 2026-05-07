@@ -1,0 +1,7 @@
+title: '張淑微老師實驗室'
+baseURL: 'https://tsaijiajen.github.io/lab-website/'
+languageCode: 'zh-tw'
+hasCJKLanguage: true
+
+# 讓 Hugo 知道要去哪裡找模板
+publishDir: 'public'
