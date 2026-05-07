@@ -1,7 +1,11 @@
 {{ define "main" }}
 
-<h1>{{ .Title }}</h1>
+<section class="page-header">
+  <h1>{{ .Title }}</h1>
+</section>
 
-{{ .Content }}
+<section class="page-content">
+  {{ .Content }}
+</section>
 
 {{ end }}
