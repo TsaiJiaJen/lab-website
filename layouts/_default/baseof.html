@@ -34,14 +34,35 @@
       display: flex; justify-content: space-between; align-items: center; padding: 15px 20px;
     }
 
-    .logo { font-weight: 700; font-size: 1.25rem; color: var(--primary-color); text-decoration: none; }
-    .nav-links { display: flex; gap: 25px; }
-    .nav-links a { text-decoration: none; color: #666; transition: 0.3s; }
-    .nav-links a:hover { color: var(--accent-color); }
+    .logo { 
+      font-weight: 700; 
+      font-size: 1.25rem; 
+      color: var(--primary-color); 
+      text-decoration: none; 
+    }
+
+    .nav-links { 
+      display: flex; 
+      gap: 25px; 
+    }
+
+    .nav-links a { 
+      text-decoration: none; 
+      color: #666; 
+      transition: 0.3s; 
+    }
+
+    .nav-links a:hover { 
+      color: var(--accent-color); 
+    }
 
     .hero-banner {
-      color: white; text-align: center;
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      color: white; 
+      text-align: center;
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center;
       margin-top: 60px;
       background-position: center;
       background-size: cover;
@@ -49,33 +70,62 @@
     }
 
     .hero-banner h1 { 
-      font-size: 2.8rem; color: white !important; border: none !important; margin: 0;
+      font-size: 2.8rem; 
+      color: white !important; 
+      border: none !important; 
+      margin: 0;
       text-shadow: 0 2px 15px rgba(0,0,0,0.7);
     }
-    .is-home-hero h1 { font-size: 3.5rem !important; }
 
-    .container {
-      max-width: 1100px; margin: -60px auto 50px;
-      padding: 40px 60px; background-color: #ffffff; border-radius: 12px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1); min-height: 450px;
-      position: relative; z-index: 10; flex: 1;
+    .is-home-hero h1 { 
+      font-size: 3.5rem !important; 
     }
 
-    .home-style { background-color: transparent !important; box-shadow: none !important; margin-top: 20px; }
-    .sub-page-container h1:first-child { display: none; }
+    .container {
+      max-width: 1100px; 
+      margin: -60px auto 50px;
+      padding: 40px 60px; 
+      background-color: #ffffff; 
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+      min-height: 450px;
+      position: relative; 
+      z-index: 10; 
+      flex: 1;
+    }
 
-    footer { text-align: center; padding: 40px; color: #666; }
+    .home-style { 
+      background-color: transparent !important; 
+      box-shadow: none !important; 
+      margin-top: 20px; 
+    }
+
+    .sub-page-container h1:first-child { 
+      display: none; 
+    }
+
+    footer { 
+      text-align: center; 
+      padding: 40px; 
+      color: #666; 
+    }
 
     @media (max-width: 600px) {
-      .container { width: 92%; padding: 25px; margin-top: -40px; }
+      .container { 
+        width: 92%; 
+        padding: 25px; 
+        margin-top: -40px; 
+      }
     }
 </style>
 </head>
+
 <body>
 
   <header>
     <nav>
       <a href="{{ "/" | relURL }}" class="logo">{{ .Site.Title }}</a>
+
       <div class="nav-links">
         {{ range .Site.Menus.main }}
         <a href="{{ .URL | relURL }}">{{ .Name }}</a>
@@ -85,46 +135,84 @@
   </header>
 
   <main>
-    {{/* 1. 決定圖片 URL 與高度 */}}
-    {{/* 預設圖：首頁紫色液體 */}}
+
+    {{/* 預設首頁圖片 */}}
     {{ $bg := "https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600" }}
     {{ $padding := "140px 20px" }}
     
     {{ $url := .RelPermalink | lower }}
 
     {{ if .IsHome }}
+
         {{ $padding = "160px 20px" }}
+
     {{ else if in $url "about" }}
-        {{/* About 換成：實驗室藍色液體與燒瓶，這張連結非常穩定 */}}
+
+        {{/* About：實驗室燒瓶藍色液體 */}}
         {{ $bg = "https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=1600" }}
+
     {{ else if in $url "photo" }}
-        {{/* Photo：維持原本的藍色特寫 */}}
+
+        {{/* Photo：顯微藍色特寫 */}}
         {{ $bg = "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1600" }}
+
     {{ else if in $url "publications" }}
+
+        {{/* Publications：研究文獻與實驗紀錄 */}}
         {{ $bg = "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1600" }}
+
     {{ else if in $url "members" }}
-        {{ $bg = "https://images.unsplash.com/photo-1530210124550-912dc1381cb8?q=80&w=1600" }}
+
+        {{/* Members：研究團隊討論情境（新版推薦） */}}
+        {{ $bg = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600" }}
+
     {{ else if in $url "courses" }}
-        {{ $bg = "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1600" }}
+
+        {{/* Courses：教學與課堂學習氛圍（新版推薦） */}}
+        {{ $bg = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1600" }}
+
     {{ else if in $url "contact" }}
-        {{ $bg = "https://images.unsplash.com/photo-1516387933999-eddd9e211833?q=80&w=1600" }}
+
+        {{/* Contact：科技感工作桌與聯絡意象（新版推薦） */}}
+        {{ $bg = "https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1600" }}
+
     {{ end }}
 
-    <section class="hero-banner {{ if .IsHome }}is-home-hero{{ end }}" 
-             style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ $bg | safeCSS }}'); padding: {{ $padding | safeCSS }};">
-        <div style="max-width: 1100px; width: 100%;">
-            {{ if .IsHome }}
-                <h1>酵素暨生技應用實驗室</h1>
-                <p style="color:white; margin-top:20px; opacity:0.9;">結合微生物發酵、天然物萃取與生物製程技術，致力於食品、保健與美妝產業之高值化應用。</p>
-            {{ else }}
-                <h1>{{ .Title }}</h1>
-            {{ end }}
-        </div>
+    <section 
+      class="hero-banner {{ if .IsHome }}is-home-hero{{ end }}" 
+      style="
+        background-image: 
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+        url('{{ $bg | safeCSS }}'); 
+        padding: {{ $padding | safeCSS }};
+      "
+    >
+
+      <div style="max-width: 1100px; width: 100%;">
+
+        {{ if .IsHome }}
+
+          <h1>酵素暨生技應用實驗室</h1>
+
+          <p style="color:white; margin-top:20px; opacity:0.9;">
+            結合微生物發酵、天然物萃取與生物製程技術，
+            致力於食品、保健與美妝產業之高值化應用。
+          </p>
+
+        {{ else }}
+
+          <h1>{{ .Title }}</h1>
+
+        {{ end }}
+
+      </div>
+
     </section>
 
     <div class="container {{ if .IsHome }}home-style{{ else }}sub-page-container{{ end }}">
-        {{ block "main" . }}{{ end }}
+      {{ block "main" . }}{{ end }}
     </div>
+
   </main>
 
   <footer>
