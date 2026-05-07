@@ -1,6 +1,7 @@
----
-title: '張淑微老師實驗室'
-type: landing
+```markdown
+    ---
+    title: "關於課程"
+    ------
 
 sections:
 
