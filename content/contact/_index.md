@@ -1,6 +1,21 @@
-content/contact/_index.md
+```markdown
+    ---
+    title: "聯絡我們"
+    ---
 ---
-title: "聯絡我們"
-type: page
-reading_time: false
+
+## 📍 實驗室地點
+
+大葉大學 藥用植物與食品保健學系  
+酵素暨生技應用實驗室（H621）
+
+---
+
+## 📞 聯絡方式
+
+電話：04-8511888 分機 2294（實驗室）  
+辦公室：04-8511888 分機 1470（老師）
+
+Email：swchang@mail.dyu.edu.tw
+
 ---
