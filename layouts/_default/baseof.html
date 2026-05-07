@@ -137,46 +137,46 @@
   <main>
 
     {{/* 預設首頁圖片 */}}
-    {{ $bg := "https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600" }}
-    {{ $padding := "140px 20px" }}
-    
-    {{ $url := .RelPermalink | lower }}
+{{ $bg := "https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600" }}
+{{ $padding := "140px 20px" }}
 
-    {{ if .IsHome }}
+{{ $url := .RelPermalink | lower }}
 
-        {{ $padding = "160px 20px" }}
+{{ if .IsHome }}
 
-    {{ else if in $url "about" }}
+    {{ $padding = "160px 20px" }}
 
-        {{/* About：實驗室燒瓶藍色液體 */}}
-        {{ $bg = "https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=1600" }}
+{{ else if in $url "about" }}
 
-    {{ else if in $url "photo" }}
+    {{/* About：實驗室燒瓶 */}}
+    {{ $bg = "https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=1600&auto=format&fit=crop" }}
 
-        {{/* Photo：顯微藍色特寫 */}}
-        {{ $bg = "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1600" }}
+{{ else if in $url "photo" }}
 
-    {{ else if in $url "publications" }}
+    {{/* Photo：顯微藍色實驗特寫 */}}
+    {{ $bg = "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1600&auto=format&fit=crop" }}
 
-        {{/* Publications：研究文獻與實驗紀錄 */}}
-        {{ $bg = "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1600" }}
+{{ else if in $url "publications" }}
 
-    {{ else if in $url "members" }}
+    {{/* Publications：研究與文獻 */}}
+    {{ $bg = "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1600&auto=format&fit=crop" }}
 
-        {{/* Members：研究團隊討論情境（新版推薦） */}}
-        {{ $bg = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600" }}
+{{ else if in $url "members" }}
 
-    {{ else if in $url "courses" }}
+    {{/* Members：研究團隊與實驗室合作 */}}
+    {{ $bg = "https://images.unsplash.com/photo-1579165466741-7f35e4755660?q=80&w=1600&auto=format&fit=crop" }}
 
-        {{/* Courses：教學與課堂學習氛圍（新版推薦） */}}
-        {{ $bg = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1600" }}
+{{ else if in $url "courses" }}
 
-    {{ else if in $url "contact" }}
+    {{/* Courses：生技實驗教學 */}}
+    {{ $bg = "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=1600&auto=format&fit=crop" }}
 
-        {{/* Contact：科技感工作桌與聯絡意象（新版推薦） */}}
-        {{ $bg = "https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1600" }}
+{{ else if in $url "contact" }}
 
-    {{ end }}
+    {{/* Contact：實驗室工作台與電腦分析 */}}
+    {{ $bg = "https://images.unsplash.com/photo-1581595219315-a187dd40c322?q=80&w=1600&auto=format&fit=crop" }}
+
+{{ end }}
 
     <section 
       class="hero-banner {{ if .IsHome }}is-home-hero{{ end }}" 
