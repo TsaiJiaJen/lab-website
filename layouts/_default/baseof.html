@@ -5,23 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
   
-  <!-- 引入 Google 字體 -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
   
 <style>
-    /* 1. 全域變數 */
     :root {
       --primary-color: #2c3e50;
       --accent-color: #3498db;
       --text-color: #333;
     }
 
-    /* 2. 背景與字體：強制背景漸層 */
     body {
       font-family: 'Noto Sans TC', sans-serif;
       margin: 0;
       padding: 0;
-      /* 稍微加深漸層顏色，讓白色容器更顯眼 */
       background: linear-gradient(180deg, #f8fafc 0%, #d1d9e6 100%) !important;
       background-attachment: fixed !important; 
       color: var(--text-color);
@@ -72,82 +68,69 @@
       color: var(--accent-color);
     }
 
-    /* 4. 主要容器：增加寬度與陰影 */
+    /* 4. 修改主要容器：判斷是否為首頁，非首頁則增加內容高度 */
     .container {
-  max-width: 1200px; /* 從 1100px 改為 1200px */
-  margin: 110px auto 50px;
-  padding: 40px 60px; /* 增加左右內邊距，看起來更平衡 */
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.12) !important; 
-  flex: 1;
-}
-
-    /* 5. 標題樣式 */
-    h1 {
-      color: var(--primary-color);
-      border-bottom: 3px solid var(--accent-color);
-      padding-bottom: 15px;
-      margin-top: 0;
+      max-width: 1200px;
+      margin: {{ if .IsHome }}110px{{ else }}100px{{ end }} auto 50px;
+      padding: {{ if .IsHome }}0 20px{{ else }}40px 60px{{ end }};
+      background-color: {{ if .IsHome }}transparent{{ else }}#ffffff{{ end }};
+      border-radius: 12px;
+      box-shadow: {{ if .IsHome }}none{{ else }}0 15px 35px rgba(0,0,0,0.12){{ end }} !important; 
+      flex: 1;
+      min-height: 70vh; /* 確保內容區塊不會太短 */
     }
 
-    h2 {
-      color: var(--primary-color);
-      margin-top: 35px;
-      border-left: 5px solid var(--accent-color);
-      padding-left: 15px;
+    /* 5. 新增：非首頁的頂部橫幅 (Publications/About等) */
+    .page-header {
+      background: linear-gradient(rgba(44,62,80,0.8), rgba(44,62,80,0.8)),
+                  url('https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600') center/cover;
+      color: white;
+      padding: 60px 40px;
+      border-radius: 12px 12px 0 0;
+      text-align: center;
+      margin: -40px -60px 40px -60px; /* 抵銷 container 的 padding */
+    }
+    
+    .page-header h1 {
+      color: white;
+      border: none;
+      margin: 0;
+      font-size: 2.5rem;
     }
 
-    /* 6. 首頁專屬樣式 (Home) */
-    /* 6. 首頁專屬樣式 (Home) */
+    /* 6. 首頁專屬 Hero */
     .hero {
       background: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)),
       url('https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600') center/cover;
       color: white;
-      padding: 160px 40px; /* 增加上下間距，讓 Hero 變高變大 */
+      padding: 160px 40px;
       border-radius: 20px;
       text-align: center;
       margin-bottom: 50px;
     }
     
-    .hero h1 { 
-      font-size: 3.5rem !important; /* 標題放大 */
-      border: none; 
-      color: white; 
-      margin-bottom: 20px;
+    .hero h1 { font-size: 3.5rem !important; border: none; color: white; margin-bottom: 20px;}
+    .hero p { font-size: 1.4rem; max-width: 800px; margin: 0 auto; }
+
+    /* 7. 研究成果佔位圖 (選用) */
+    .placeholder-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-top: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    .hero p {
-      font-size: 1.4rem; /* 副標題放大 */
-      max-width: 800px;
-      margin: 0 auto;
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #666;
     }
 
-    .research-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 卡片稍微加寬 */
-      gap: 30px; /* 間距加大 */
-    }
-
-    .research-item {
-      background: #ffffff; /* 卡片用純白 */
-      padding: 35px; /* 內距加大 */
-      border-radius: 15px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* 輕微陰影 */
-    }
-
-    /* 讓首頁容器「隱形」的關鍵樣式 */
-    .container.home-style {
-      background-color: transparent !important;
-      box-shadow: none !important;
-      max-width: 1200px; /* 首頁內容可以更寬 */
-      padding: 0 20px; /* 移除原本白色大框的內距 */
-    }
-    /* 9. 手機版 */
     @media (max-width: 600px) {
       nav { flex-direction: column; gap: 15px; }
       .container { margin-top: 150px; padding: 25px; width: 90%; }
+      .page-header { margin: -25px -25px 30px -25px; }
     }
 </style>
 </head>
@@ -164,8 +147,20 @@
     </nav>
   </header>
 
-  <main class="container">
+  <main class="container {{ if .IsHome }}home-style{{ end }}">
+    {{ if not .IsHome }}
+      <div class="page-header">
+        <h1>{{ .Title }}</h1>
+      </div>
+    {{ end }}
+
     {{ block "main" . }}{{ end }}
+    
+    {{ if (eq .Title "Publications") }}
+      <div style="text-align: center;">
+        <img src="https://images.unsplash.com/photo-1454165833767-027ffea9e787?q=80&w=1200" alt="Research" class="placeholder-img">
+      </div>
+    {{ end }}
   </main>
 
   <footer>
