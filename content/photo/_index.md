@@ -1,4 +1,3 @@
-markdown
 ---
 title: "關於實驗室相片"
 ---
