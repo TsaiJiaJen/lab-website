@@ -1,6 +1,7 @@
----
-title: 實驗室成員
-type: landing
+```markdown
+    ---
+    title: "關於實驗室成員"
+    ---
 
 sections:
 
