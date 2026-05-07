@@ -9,19 +9,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
   
 <style>
+    /* 1. 全域變數 */
     :root {
       --primary-color: #2c3e50;
       --accent-color: #3498db;
-      --bg-color: #f4f7f6;
       --text-color: #333;
     }
 
+    /* 2. 背景與字體：強制背景漸層 */
     body {
       font-family: 'Noto Sans TC', sans-serif;
       margin: 0;
       padding: 0;
-      /* 調整為稍微明顯一點的漸層 */
-      background: linear-gradient(to bottom, #f8fafc, #e2e8f0) !important;
+      /* 稍微加深漸層顏色，讓白色容器更顯眼 */
+      background: linear-gradient(180deg, #f8fafc 0%, #d1d9e6 100%) !important;
       background-attachment: fixed !important; 
       color: var(--text-color);
       line-height: 1.8;
@@ -30,6 +31,7 @@
       min-height: 100vh;
     }
 
+    /* 3. 導覽列 */
     header {
       background-color: #ffffff;
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -40,7 +42,7 @@
     }
 
     nav {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
@@ -70,30 +72,70 @@
       color: var(--accent-color);
     }
 
+    /* 4. 主要容器：增加寬度與陰影 */
     .container {
       max-width: 1100px;
       margin: 110px auto 50px;
       padding: 40px 50px;
       background-color: #ffffff;
       border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+      /* 強化陰影，讓白色框框浮起來 */
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12) !important; 
       flex: 1;
     }
 
+    /* 5. 標題樣式 */
     h1 {
       color: var(--primary-color);
       border-bottom: 3px solid var(--accent-color);
       padding-bottom: 15px;
+      margin-top: 0;
     }
 
+    h2 {
+      color: var(--primary-color);
+      margin-top: 35px;
+      border-left: 5px solid var(--accent-color);
+      padding-left: 15px;
+    }
+
+    /* 6. 首頁專屬樣式 (Home) */
+    .hero {
+      background: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)),
+      url('https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600') center/cover;
+      color: white;
+      padding: 80px 40px;
+      border-radius: 15px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .hero h1 { border: none; color: white; }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .research-item {
+      background: #f8fafc;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* 7. 內頁專屬樣式 (About, Publications 等) */
+    .page-header { text-align: center; margin-bottom: 30px; }
+    .page-header h1 { border: none; }
+
+    /* 8. 頁尾 */
     footer {
       text-align: center;
       padding: 30px;
-      background-color: transparent; /* 讓背景透出漸層 */
       color: #999;
       font-size: 0.85rem;
     }
 
+    /* 9. 手機版 */
     @media (max-width: 600px) {
       nav { flex-direction: column; gap: 15px; }
       .container { margin-top: 150px; padding: 25px; width: 90%; }
