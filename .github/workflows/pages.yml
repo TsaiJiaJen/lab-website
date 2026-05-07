@@ -1,0 +1,38 @@
+name: Deploy Hugo site to Pages
+
+on:
+  push:
+    branches: ["main"]  # 當您提交到 main 分支時觸發
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true # 使用擴充版以支援更多 CSS 功能
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public # Hugo 編譯後的產出資料夾
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
