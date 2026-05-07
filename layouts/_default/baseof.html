@@ -39,6 +39,7 @@
     .nav-links a { text-decoration: none; color: #666; transition: 0.3s; }
     .nav-links a:hover { color: var(--accent-color); }
 
+    /* Hero Banner 基礎樣式 */
     .hero-banner {
       color: white; text-align: center;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -46,6 +47,9 @@
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
+      /* 使用 CSS 變數 */
+      background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), var(--hero-bg);
+      padding: var(--hero-padding);
     }
 
     .hero-banner h1 { 
@@ -85,17 +89,43 @@
   </header>
 
   <main>
-    {{/* 1. 決定圖片 URL 與高度 */}}
-    {{/* 預設圖 */}}
+    {{/* 1. 計算圖片 URL 與 Padding */}}
     {{ $bg := "https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600" }}
-    {{ $padding := "140px 20px" }}
+    {{ $pad := "140px 20px" }}
     
-    {{/* 加強版判斷：同時檢查路徑與標題 */}}
     {{ $url := .RelPermalink | lower }}
-    {{ $title := .Title | lower }}
 
     {{ if .IsHome }}
-        {{ $padding = "160px 20px" }}
-    {{ else if or (in $url "about") (in $title "about") (in $title "關於") }}
-        {{/* About 換成：高品質顯微鏡特寫 */}}
-        {{ $bg = "
+      {{ $pad = "160px 20px" }}
+    {{ else if in $url "about" }}
+      {{ $bg = "https://images.unsplash.com/photo-1579154273151-09608b97240d?q=80&w=1600" }}
+    {{ else if in $url "contact" }}
+      {{ $bg = "https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=1600" }}
+    {{ else if in $url "photo" }}
+      {{ $bg = "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1600" }}
+    {{ end }}
+
+    {{/* 2. 透過 CSS 變數傳遞給 Style 屬性 */}}
+    <section class="hero-banner {{ if .IsHome }}is-home-hero{{ end }}" 
+             style='--hero-bg: url("{{ $bg | safeCSS }}"); --hero-padding: {{ $pad | safeCSS }};'>
+        <div style="max-width: 1100px; width: 100%;">
+            {{ if .IsHome }}
+                <h1>酵素暨生技應用實驗室</h1>
+                <p style="color:white; margin-top:20px; opacity:0.9;">結合微生物發酵、天然物萃取與生物製程技術，致力於食品、保健與美妝產業之高值化應用。</p>
+            {{ else }}
+                <h1>{{ .Title }}</h1>
+            {{ end }}
+        </div>
+    </section>
+
+    <div class="container {{ if .IsHome }}home-style{{ else }}sub-page-container{{ end }}">
+        {{ block "main" . }}{{ end }}
+    </div>
+  </main>
+
+  <footer>
+    &copy; {{ now.Format "2006" }} {{ .Site.Title }} | All Rights Reserved
+  </footer>
+
+</body>
+</html>
