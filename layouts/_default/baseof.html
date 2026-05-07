@@ -132,6 +132,16 @@
       .container { margin-top: 150px; padding: 25px; width: 90%; }
       .page-header { margin: -25px -25px 30px -25px; }
     }
+  /* 如果是分頁，隱藏內容區塊裡的第一個 h1，避免標題重複 */
+.sub-page h1:first-child {
+    display: none;
+}
+
+/* 調整內頁容器的間距，讓它更緊湊 */
+.container.sub-page {
+    margin-top: -60px; /* 讓白色方框往上蓋住一部分橫幅，增加設計感 */
+    padding-top: 50px;
+}
 </style>
 </head>
 <body>
