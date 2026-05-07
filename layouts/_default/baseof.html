@@ -17,8 +17,7 @@
     body {
       font-family: 'Noto Sans TC', sans-serif;
       margin: 0; padding: 0;
-      background: linear-gradient(180deg, #f8fafc 0%, #d1d9e6 100%) !important;
-      background-attachment: fixed !important; 
+      background: #f8fafc !important;
       color: var(--text-color);
       line-height: 1.8;
       display: flex; flex-direction: column; min-height: 100vh;
@@ -40,20 +39,20 @@
     .nav-links a { text-decoration: none; color: #666; transition: 0.3s; }
     .nav-links a:hover { color: var(--accent-color); }
 
-    /* 橫幅樣式 */
     .hero-banner {
       color: white; text-align: center;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
       margin-top: 60px;
-      /* 確保背景圖有深色遮罩，讓白字清晰 */
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
     }
 
     .hero-banner h1 { 
       font-size: 2.8rem; color: white !important; border: none !important; margin: 0;
-      text-shadow: 0 2px 15px rgba(0,0,0,0.6);
+      text-shadow: 0 2px 15px rgba(0,0,0,0.7);
     }
     .is-home-hero h1 { font-size: 3.5rem !important; }
-    .hero-banner p { font-size: 1.2rem; max-width: 800px; margin: 20px auto 0; opacity: 0.9; }
 
     .container {
       max-width: 1100px; margin: -60px auto 50px;
@@ -62,13 +61,12 @@
       position: relative; z-index: 10; flex: 1;
     }
 
-    .home-style { background-color: transparent !important; box-shadow: none !important; margin-top: 20px; padding: 0 20px; }
+    .home-style { background-color: transparent !important; box-shadow: none !important; margin-top: 20px; }
     .sub-page-container h1:first-child { display: none; }
 
     footer { text-align: center; padding: 40px; color: #666; }
 
     @media (max-width: 600px) {
-      nav { flex-direction: column; gap: 15px; }
       .container { width: 92%; padding: 25px; margin-top: -40px; }
     }
 </style>
@@ -89,19 +87,19 @@
   <main>
     {{/* 1. 決定圖片 URL 與高度 (Padding) */}}
     {{ $bg := "https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600" }}
-    {{ $padding := "140px 20px" }} {{/* 分頁加大到 140px */}}
+    {{ $padding := "140px 20px" }}
     
     {{ $url := .RelPermalink | lower }}
 
     {{ if .IsHome }}
-        {{ $bg = "https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600" }}
         {{ $padding = "160px 20px" }}
     {{ else if in $url "about" }}
-        {{/* 強制 About 頁面換一張更清晰、更有設計感的圖 */}}
+        {{/* About 換成：培養皿特寫 */}}
+        {{ $bg = "https://images.unsplash.com/photo-1579154273151-09608b97240d?q=80&w=1600" }}
+    {{ else if in $url "photo" }}
+        {{/* Photo 換成：原本那張專業實驗室藍色圖 */}}
         {{ $bg = "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1600" }}
     {{ else if in $url "publications" }}
-        {{ $bg = "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1600" }}
-    {{ else if in $url "photo" }}
         {{ $bg = "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1600" }}
     {{ else if in $url "members" }}
         {{ $bg = "https://images.unsplash.com/photo-1530210124550-912dc1381cb8?q=80&w=1600" }}
@@ -112,13 +110,15 @@
     {{ end }}
 
     <section class="hero-banner {{ if .IsHome }}is-home-hero{{ end }}" 
-             style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ $bg | safeCSS }}'); padding: {{ $padding | safeCSS }}; background-position: center; background-size: cover;">
-        {{ if .IsHome }}
-            <h1>酵素暨生技應用實驗室</h1>
-            <p>結合微生物發酵、天然物萃取與生物製程技術，致力於食品、保健與美妝產業之高值化應用。</p>
-        {{ else }}
-            <h1>{{ .Title }}</h1>
-        {{ end }}
+             style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ $bg | safeCSS }}'); padding: {{ $padding | safeCSS }};">
+        <div style="max-width: 1100px; width: 100%;">
+            {{ if .IsHome }}
+                <h1>酵素暨生技應用實驗室</h1>
+                <p style="color:white; margin-top:20px; opacity:0.9;">結合微生物發酵、天然物萃取與生物製程技術，致力於食品、保健與美妝產業之高值化應用。</p>
+            {{ else }}
+                <h1>{{ .Title }}</h1>
+            {{ end }}
+        </div>
     </section>
 
     <div class="container {{ if .IsHome }}home-style{{ else }}sub-page-container{{ end }}">
