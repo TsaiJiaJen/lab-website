@@ -8,12 +8,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
   
 <style>
+    /* 1. 全域變數 */
     :root {
       --primary-color: #2c3e50;
       --accent-color: #3498db;
       --text-color: #333;
     }
 
+    /* 2. 背景與字體 */
     body {
       font-family: 'Noto Sans TC', sans-serif;
       margin: 0;
@@ -68,80 +70,75 @@
       color: var(--accent-color);
     }
 
-    /* 4. 修改主要容器：判斷是否為首頁，非首頁則增加內容高度 */
-    .container {
-      max-width: 1200px;
-      margin: {{ if .IsHome }}110px{{ else }}100px{{ end }} auto 50px;
-      padding: {{ if .IsHome }}0 20px{{ else }}40px 60px{{ end }};
-      background-color: {{ if .IsHome }}transparent{{ else }}#ffffff{{ end }};
-      border-radius: 12px;
-      box-shadow: {{ if .IsHome }}none{{ else }}0 15px 35px rgba(0,0,0,0.12){{ end }} !important; 
-      flex: 1;
-      min-height: 70vh; /* 確保內容區塊不會太短 */
-    }
-
-    /* 5. 新增：非首頁的頂部橫幅 (Publications/About等) */
-    .page-header {
-      background: linear-gradient(rgba(44,62,80,0.8), rgba(44,62,80,0.8)),
+    /* 4. 全站統一的標題橫幅 (Hero Banner) */
+    .hero-banner {
+      background: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)),
                   url('https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600') center/cover;
       color: white;
-      padding: 60px 40px;
-      border-radius: 12px 12px 0 0;
       text-align: center;
-      margin: -40px -60px 40px -60px; /* 抵銷 container 的 padding */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 60px; /* 避開固定導覽列 */
+      /* 首頁 Banner 較高，內頁縮小 */
+      padding: {{ if .IsHome }}160px 20px{{ else }}80px 20px{{ end }};
     }
-    
-    .page-header h1 {
-      color: white;
-      border: none;
+
+    .hero-banner h1 { 
+      font-size: {{ if .IsHome }}3.5rem{{ else }}2.5rem{{ end }}; 
+      color: white !important; 
+      border: none !important;
       margin: 0;
-      font-size: 2.5rem;
     }
 
-    /* 6. 首頁專屬 Hero */
-    .hero {
-      background: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)),
-      url('https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600') center/cover;
-      color: white;
-      padding: 160px 40px;
-      border-radius: 20px;
-      text-align: center;
-      margin-bottom: 50px;
-    }
-    
-    .hero h1 { font-size: 3.5rem !important; border: none; color: white; margin-bottom: 20px;}
-    .hero p { font-size: 1.4rem; max-width: 800px; margin: 0 auto; }
-
-    /* 7. 研究成果佔位圖 (選用) */
-    .placeholder-img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin-top: 30px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    .hero-banner p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 20px auto 0;
+      opacity: 0.9;
     }
 
+    /* 5. 主要內容容器 */
+    .container {
+      max-width: 1100px;
+      margin: -40px auto 50px; /* 讓內容稍微往上浮在 Banner 上 */
+      padding: 40px 60px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      min-height: 400px; /* 解決留白太空的問題 */
+      position: relative;
+      z-index: 10;
+      flex: 1;
+    }
+
+    /* 首頁容器專用樣式：透明背景且不浮起 */
+    .container.home-style {
+      background-color: transparent !important;
+      box-shadow: none !important;
+      margin-top: 20px;
+      padding: 0 20px;
+    }
+
+    /* 6. 自動修正重複標題：隱藏分頁內容中的第一個 h1 */
+    .sub-page h1:first-child {
+      display: none;
+    }
+
+    /* 7. 頁尾 */
     footer {
       text-align: center;
-      padding: 30px;
+      padding: 40px;
       color: #666;
     }
 
+    /* 8. 手機版調整 */
     @media (max-width: 600px) {
       nav { flex-direction: column; gap: 15px; }
-      .container { margin-top: 150px; padding: 25px; width: 90%; }
-      .page-header { margin: -25px -25px 30px -25px; }
+      .container { width: 90%; padding: 25px; margin-top: -20px; }
+      .hero-banner h1 { font-size: 2rem; }
     }
-  /* 如果是分頁，隱藏內容區塊裡的第一個 h1，避免標題重複 */
-.sub-page h1:first-child {
-    display: none;
-}
-
-/* 調整內頁容器的間距，讓它更緊湊 */
-.container.sub-page {
-    margin-top: -60px; /* 讓白色方框往上蓋住一部分橫幅，增加設計感 */
-    padding-top: 50px;
-}
 </style>
 </head>
 <body>
@@ -157,20 +154,19 @@
     </nav>
   </header>
 
-  <main class="container {{ if .IsHome }}home-style{{ end }}">
-    {{ if not .IsHome }}
-      <div class="page-header">
-        <h1>{{ .Title }}</h1>
-      </div>
-    {{ end }}
+  <main>
+    <section class="hero-banner">
+        {{ if .IsHome }}
+            <h1>酵素暨生技應用實驗室</h1>
+            <p>結合微生物發酵、天然物萃取與生物製程技術，致力於食品、保健與美妝產業之高值化應用。</p>
+        {{ else }}
+            <h1>{{ .Title }}</h1>
+        {{ end }}
+    </section>
 
-    {{ block "main" . }}{{ end }}
-    
-    {{ if (eq .Title "Publications") }}
-      <div style="text-align: center;">
-        <img src="https://images.unsplash.com/photo-1454165833767-027ffea9e787?q=80&w=1200" alt="Research" class="placeholder-img">
-      </div>
-    {{ end }}
+    <div class="container {{ if .IsHome }}home-style{{ else }}sub-page{{ end }}">
+        {{ block "main" . }}{{ end }}
+    </div>
   </main>
 
   <footer>
