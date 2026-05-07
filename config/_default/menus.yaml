@@ -1,22 +1,28 @@
 main:
-  - name: Home 
+  - name: Home
     url: /
     weight: 10
-  - name: About 
-    url: "about"
+
+  - name: About
+    url: /about/
     weight: 11
-  - name: Publications 
-    url: "publications"
+
+  - name: Publications
+    url: /publications/
     weight: 12
-  - name: Courses 
-    url: "courses"
+
+  - name: Courses
+    url: /courses/
     weight: 13
-  - name: Members 
-    url: "members"
+
+  - name: Members
+    url: /members/
     weight: 14
-  - name: Contact 
-    url: "contact"
+
+  - name: Contact
+    url: /contact/
     weight: 15
-  - name: Photo 
-    url: "photo"
+
+  - name: Photo
+    url: /photo/
     weight: 16
