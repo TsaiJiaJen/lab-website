@@ -60,19 +60,24 @@
       justify-content: center;
       align-items: center;
       margin-top: 60px;
-      padding: {{ if .IsHome }}160px 20px{{ else }}100px 20px{{ end }};
+      padding: 100px 20px;
     }
 
+    /* 首頁高度加高 */
+    .is-home-hero { padding: 160px 20px; }
+
+    /* 不同分頁背景圖 */
     .hero-about { background-image: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)), url('https://images.unsplash.com/photo-1579154273151-09608b97240d?q=80&w=1600'); }
     .hero-publications { background-image: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)), url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1600'); }
     .hero-courses { background-image: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)), url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1600'); }
 
     .hero-banner h1 { 
-      font-size: {{ if .IsHome }}3.5rem{{ else }}2.5rem{{ end }}; 
+      font-size: 2.5rem; 
       color: white !important; 
       border: none !important;
       margin: 0;
     }
+    .is-home-hero h1 { font-size: 3.5rem; }
 
     .container {
       max-width: 1100px;
@@ -87,7 +92,7 @@
       flex: 1;
     }
 
-    .container.home-style {
+    .home-style {
       background-color: transparent !important;
       box-shadow: none !important;
       margin-top: 20px;
@@ -118,9 +123,32 @@
   </header>
 
   <main>
-    <section class="hero-banner {{ if eq .Title "About" }}hero-about{{ else if eq .Title "Publications" }}hero-publications{{ else if eq .Title "Courses" }}hero-courses{{ end }}">
+    {{ $heroClass := "" }}
+    {{ if .IsHome }}{{ $heroClass = "is-home-hero" }}{{ end }}
+    {{ if eq .Title "About" }}{{ $heroClass = "hero-about" }}{{ end }}
+    {{ if eq .Title "Publications" }}{{ $heroClass = "hero-publications" }}{{ end }}
+    {{ if eq .Title "Courses" }}{{ $heroClass = "hero-courses" }}{{ end }}
+
+    <section class="hero-banner {{ $heroClass }}">
         {{ if .IsHome }}
             <h1>酵素暨生技應用實驗室</h1>
             <p>結合微生物發酵、天然物萃取與生物製程技術，致力於食品、保健與美妝產業之高值化應用。</p>
         {{ else }}
-            <h1>{{ .Title }}
+            <h1>{{ .Title }}</h1>
+        {{ end }}
+    </section>
+
+    {{ $containerClass := "sub-page" }}
+    {{ if .IsHome }}{{ $containerClass = "home-style" }}{{ end }}
+
+    <div class="container {{ $containerClass }}">
+        {{ block "main" . }}{{ end }}
+    </div>
+  </main>
+
+  <footer>
+    &copy; {{ now.Format "2006" }} {{ .Site.Title }} | All Rights Reserved
+  </footer>
+
+</body>
+</html>
