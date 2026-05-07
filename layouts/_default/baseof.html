@@ -40,19 +40,27 @@
     .nav-links a { text-decoration: none; color: #666; transition: 0.3s; }
     .nav-links a:hover { color: var(--accent-color); }
 
+    /* 核心：Hero Banner 樣式 */
     .hero-banner {
       color: white; text-align: center;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
       margin-top: 60px;
+      /* 使用 CSS 變數來接收圖片，避開安全報錯 */
+      background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), var(--bg-url);
       background-position: center;
       background-size: cover;
-      /* 確保背景圖有深色遮罩，讓白字清晰 */
     }
 
+    /* 這裡處理放大：首頁 160px，分頁加大到 140px */
+    .hero-banner.is-home { padding: 160px 20px !important; }
+    .hero-banner.is-sub { padding: 140px 20px !important; }
+
     .hero-banner h1 { 
-      font-size: 2.8rem; color: white !important; border: none !important; margin: 0;
+      color: white !important; border: none !important; margin: 0;
       text-shadow: 0 2px 15px rgba(0,0,0,0.6);
     }
+    .hero-banner.is-home h1 { font-size: 3.5rem !important; }
+    .hero-banner.is-sub h1 { font-size: 2.8rem !important; }
     
     .hero-banner p { font-size: 1.2rem; max-width: 800px; margin: 20px auto 0; opacity: 0.9; }
 
@@ -64,8 +72,6 @@
     }
 
     .home-style { background-color: transparent !important; box-shadow: none !important; margin-top: 20px; padding: 0 20px; }
-    
-    /* 隱藏內頁重複的標題 */
     .sub-page-container h1:first-child { display: none; }
 
     footer { text-align: center; padding: 40px; color: #666; }
@@ -73,6 +79,7 @@
     @media (max-width: 600px) {
       nav { flex-direction: column; gap: 15px; }
       .container { width: 92%; padding: 25px; margin-top: -40px; }
+      .hero-banner.is-sub { padding: 80px 20px !important; }
     }
 </style>
 </head>
@@ -90,10 +97,8 @@
   </header>
 
   <main>
-    {{/* 1. 決定圖片 URL */}}
+    {{/* 1. 設定背景圖邏輯 */}}
     {{ $bg := "https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600" }}
-    
-    {{/* 使用 .Section 比對資料夾名稱，這是 Hugo 最穩定的方式 */}}
     {{ if eq .Section "about" }}{{ $bg = "https://images.unsplash.com/photo-1579154273151-09608b97240d?q=80&w=1600" }}{{ end }}
     {{ if eq .Section "publications" }}{{ $bg = "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1600" }}{{ end }}
     {{ if eq .Section "photo" }}{{ $bg = "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1600" }}{{ end }}
@@ -101,13 +106,27 @@
     {{ if eq .Section "courses" }}{{ $bg = "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1600" }}{{ end }}
     {{ if eq .Section "contact" }}{{ $bg = "https://images.unsplash.com/photo-1516387933999-eddd9e211833?q=80&w=1600" }}{{ end }}
 
-    {{/* 2. 決定高度 (Home 160px, 其他 140px) */}}
-    {{ $padding := "140px 20px" }}
-    {{ $h1_size := "2.8rem" }}
-    {{ if .IsHome }}
-        {{ $padding = "160px 20px" }}
-        {{ $h1_size = "3.5rem" }}
-    {{ end }}
+    {{/* 2. 渲染 Hero Banner */}}
+    <section class="hero-banner {{ if .IsHome }}is-home{{ else }}is-sub{{ end }}" 
+             style="--bg-url: url('{{ $bg | safeCSS }}');">
+        <div style="max-width: 1100px; width: 100%;">
+            {{ if .IsHome }}
+                <h1>酵素暨生技應用實驗室</h1>
+                <p>結合微生物發酵、天然物萃取與生物製程技術，致力於食品、保健與美妝產業之高值化應用。</p>
+            {{ else }}
+                <h1>{{ .Title }}</h1>
+            {{ end }}
+        </div>
+    </section>
 
-    <section class="hero-banner" 
-             style="background-image: linear-gradient(rgba(0,0,0,0
+    <div class="container {{ if .IsHome }}home-style{{ else }}sub-page-container{{ end }}">
+        {{ block "main" . }}{{ end }}
+    </div>
+  </main>
+
+  <footer>
+    &copy; {{ now.Format "2006" }} {{ .Site.Title }} | All Rights Reserved
+  </footer>
+
+</body>
+</html>
