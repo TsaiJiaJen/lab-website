@@ -1,7 +1,7 @@
 ```markdown
     ---
     title: "關於課程"
-    ------
+    ---
 
 sections:
 
