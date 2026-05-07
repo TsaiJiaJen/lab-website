@@ -74,14 +74,18 @@
     }
 
     /* 主要內容區域 (白色容器) */
-    .container {
-      max-width: 1100px;
-      margin: 110px auto 50px; /* 預留上方導覽列高度 */
-      padding: 40px 50px;
-      background-color: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      flex: 1; /* 讓容器撐開空間 */
+    ..container {
+  max-width: 1100px; /* 剛才建議加寬到 1100px */
+  margin: 110px auto 50px;
+  padding: 40px 50px;
+  background-color: #ffffff; /* 這裡維持純白，跟背景漸層產生對比 */
+  border-radius: 12px;
+  
+  /* 讓陰影深一點，這樣在淺灰色漸層背景上才會有「浮起來」的感覺 */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+  
+  flex: 1;
+} /* 讓容器撐開空間 */
     }
 
     /* 內容排版樣式 */
