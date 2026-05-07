@@ -122,7 +122,7 @@
 
   <header>
     <nav>
-      <a href="/" class="logo">{{ .Site.Title }}</a>
+      <a href="{{ "/" | relURL }}" class="logo">
       <div class="nav-links">
         {{ range .Site.Menus.main }}
         <a href="{{ .URL | relLangURL }}">{{ .Name }}</a>
