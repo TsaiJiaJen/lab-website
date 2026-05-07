@@ -17,7 +17,8 @@
     body {
       font-family: 'Noto Sans TC', sans-serif;
       margin: 0; padding: 0;
-      background: #f4f7f6 !important;
+      background: linear-gradient(180deg, #f8fafc 0%, #d1d9e6 100%) !important;
+      background-attachment: fixed !important; 
       color: var(--text-color);
       line-height: 1.8;
       display: flex; flex-direction: column; min-height: 100vh;
@@ -39,58 +40,36 @@
     .nav-links a { text-decoration: none; color: #666; transition: 0.3s; }
     .nav-links a:hover { color: var(--accent-color); }
 
-    /* --- Hero Banner 核心控制 --- */
+    /* 橫幅樣式 */
     .hero-banner {
-      background-color: #2c3e50; /* 預設深色，防止圖跑不出來時字看不見 */
-      background-position: center center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      color: white !important;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      color: white; text-align: center;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
       margin-top: 60px;
-      width: 100%;
+      /* 確保背景圖有深色遮罩，讓白字清晰 */
     }
-
-    /* 控制「放大」：首頁 160px，分頁加大到 140px */
-    .hero-home { padding: 160px 20px !important; }
-    .hero-sub { padding: 140px 20px !important; }
-
-    /* 強制背景圖 (使用網址直連並加上深色遮罩) */
-    .bg-img-default { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1532187643603-ba119ca4109e?auto=format&fit=crop&w=1600&q=80') !important; }
-    .bg-img-about { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1579154273151-09608b97240d?auto=format&fit=crop&w=1600&q=80') !important; }
-    .bg-img-pubs { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&w=1600&q=80') !important; }
-    .bg-img-photo { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1600&q=80') !important; }
-    .bg-img-members { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1530210124550-912dc1381cb8?auto=format&fit=crop&w=1600&q=80') !important; }
-    .bg-img-courses { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1600&q=80') !important; }
-    .bg-img-contact { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1516387933999-eddd9e211833?auto=format&fit=crop&w=1600&q=80') !important; }
 
     .hero-banner h1 { 
-      color: white !important; margin: 0; font-weight: 700;
-      text-shadow: 0 2px 15px rgba(0,0,0,0.5);
+      font-size: 2.8rem; color: white !important; border: none !important; margin: 0;
+      text-shadow: 0 2px 15px rgba(0,0,0,0.6);
     }
-    .hero-home h1 { font-size: 3.5rem !important; }
-    .hero-sub h1 { font-size: 2.8rem !important; }
-    
-    /* 內容容器 */
+    .is-home-hero h1 { font-size: 3.5rem !important; }
+    .hero-banner p { font-size: 1.2rem; max-width: 800px; margin: 20px auto 0; opacity: 0.9; }
+
     .container {
       max-width: 1100px; margin: -60px auto 50px;
       padding: 40px 60px; background-color: #ffffff; border-radius: 12px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.1); min-height: 450px;
-      position: relative; z-index: 10;
+      position: relative; z-index: 10; flex: 1;
     }
 
-    .home-style { background-color: transparent !important; box-shadow: none !important; margin-top: 20px; }
+    .home-style { background-color: transparent !important; box-shadow: none !important; margin-top: 20px; padding: 0 20px; }
     .sub-page-container h1:first-child { display: none; }
 
     footer { text-align: center; padding: 40px; color: #666; }
 
     @media (max-width: 600px) {
+      nav { flex-direction: column; gap: 15px; }
       .container { width: 92%; padding: 25px; margin-top: -40px; }
-      .hero-sub { padding: 80px 20px !important; }
     }
 </style>
 </head>
@@ -108,38 +87,38 @@
   </header>
 
   <main>
-    {{/* 1. 決定 Class 名稱 */}}
-    {{ $bg_class := "bg-img-default" }}
-    {{ $size_class := "hero-sub" }}
+    {{/* 1. 決定圖片 URL 與高度 (Padding) */}}
+    {{ $bg := "https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600" }}
+    {{ $padding := "140px 20px" }} {{/* 分頁加大到 140px */}}
     
-    {{/* 取得路徑進行強力比對 */}}
-    {{ $p := .RelPermalink | lower }}
+    {{ $url := .RelPermalink | lower }}
 
     {{ if .IsHome }}
-      {{ $size_class = "hero-home" }}
-    {{ else if in $p "about" }}
-      {{ $bg_class = "bg-img-about" }}
-    {{ else if in $p "publications" }}
-      {{ $bg_class = "bg-img-pubs" }}
-    {{ else if in $p "photo" }}
-      {{ $bg_class = "bg-img-photo" }}
-    {{ else if in $p "members" }}
-      {{ $bg_class = "bg-img-members" }}
-    {{ else if in $p "courses" }}
-      {{ $bg_class = "bg-img-courses" }}
-    {{ else if in $p "contact" }}
-      {{ $bg_class = "bg-img-contact" }}
+        {{ $bg = "https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600" }}
+        {{ $padding = "160px 20px" }}
+    {{ else if in $url "about" }}
+        {{/* 強制 About 頁面換一張更清晰、更有設計感的圖 */}}
+        {{ $bg = "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1600" }}
+    {{ else if in $url "publications" }}
+        {{ $bg = "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1600" }}
+    {{ else if in $url "photo" }}
+        {{ $bg = "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1600" }}
+    {{ else if in $url "members" }}
+        {{ $bg = "https://images.unsplash.com/photo-1530210124550-912dc1381cb8?q=80&w=1600" }}
+    {{ else if in $url "courses" }}
+        {{ $bg = "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1600" }}
+    {{ else if in $url "contact" }}
+        {{ $bg = "https://images.unsplash.com/photo-1516387933999-eddd9e211833?q=80&w=1600" }}
     {{ end }}
 
-    <section class="hero-banner {{ $bg_class }} {{ $size_class }}">
-        <div style="max-width: 1100px; width: 100%;">
-            {{ if .IsHome }}
-                <h1>酵素暨生技應用實驗室</h1>
-                <p style="color:white; margin-top:20px;">結合微生物發酵、天然物萃取與生物製程技術，致力於食品、保健與美妝產業之高值化應用。</p>
-            {{ else }}
-                <h1>{{ .Title }}</h1>
-            {{ end }}
-        </div>
+    <section class="hero-banner {{ if .IsHome }}is-home-hero{{ end }}" 
+             style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ $bg | safeCSS }}'); padding: {{ $padding | safeCSS }}; background-position: center; background-size: cover;">
+        {{ if .IsHome }}
+            <h1>酵素暨生技應用實驗室</h1>
+            <p>結合微生物發酵、天然物萃取與生物製程技術，致力於食品、保健與美妝產業之高值化應用。</p>
+        {{ else }}
+            <h1>{{ .Title }}</h1>
+        {{ end }}
     </section>
 
     <div class="container {{ if .IsHome }}home-style{{ else }}sub-page-container{{ end }}">
@@ -148,7 +127,7 @@
   </main>
 
   <footer>
-    &copy; {{ now.Format "2006" }} {{ .Site.Title }}
+    &copy; {{ now.Format "2006" }} {{ .Site.Title }} | All Rights Reserved
   </footer>
 
 </body>
