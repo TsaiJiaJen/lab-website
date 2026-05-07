@@ -109,7 +109,66 @@
       font-size: 0.85rem;
       border-top: 1px solid #eee;
     }
+     /* Hero 區 */
+.hero {
+  background: linear-gradient(
+    rgba(44,62,80,0.7),
+    rgba(44,62,80,0.7)
+  ),
+  url('https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600') center/cover;
 
+  color: white;
+  padding: 120px 40px;
+  border-radius: 20px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  border: none;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* 卡片區塊 */
+.section-card {
+  background: white;
+  padding: 40px;
+  margin-bottom: 35px;
+  border-radius: 18px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+/* 研究方向卡片 */
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.research-item {
+  background: #f8fafc;
+  padding: 25px;
+  border-radius: 14px;
+  transition: 0.3s;
+}
+
+.research-item:hover {
+  transform: translateY(-5px);
+}
+
+.research-item h3 {
+  margin-top: 0;
+  color: #2c3e50;
+}
     /* 手機版優化 */
     @media (max-width: 600px) {
       nav { flex-direction: column; gap: 15px; }
