@@ -1,6 +1,5 @@
-title: '張淑微老師實驗室'
-baseURL: 'https://tsaijiajen.github.io/lab-website/'
-languageCode: 'zh-tw'
-hasCJKLanguage: true
-
+baseURL: "https://tsaijiajen.github.io/lab-website/"
+title: "張淑微老師實驗室"
+canonifyURLs: true  # 加入這一行，強制 Hugo 修正路徑
+relativeURLs: true  # 加入這一行，確保在不同環境下連結都能運作
 
