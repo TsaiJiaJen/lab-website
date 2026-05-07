@@ -12,7 +12,6 @@
       --primary-color: #2c3e50;
       --accent-color: #3498db;
       --text-color: #333;
-      /* 預設背景圖 */
       --hero-bg: url('https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600');
     }
 
@@ -42,20 +41,18 @@
     .nav-links a { text-decoration: none; color: #666; transition: 0.3s; }
     .nav-links a:hover { color: var(--accent-color); }
 
-    /* 橫幅樣式 */
     .hero-banner {
       background: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)), var(--hero-bg) center/cover;
       color: white; text-align: center;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
       margin-top: 60px;
-      padding: 140px 20px; /* 內頁高度 */
+      padding: 140px 20px; 
     }
 
-    /* 首頁高度與字體大小 */
     .is-home-hero { padding: 160px 20px !important; }
     .is-home-hero h1 { font-size: 3.5rem !important; }
 
-    /* 各分頁專屬背景圖定義 */
+    /* 各分頁專屬背景圖 */
     .hero-about { --hero-bg: url('https://images.unsplash.com/photo-1579154273151-09608b97240d?q=80&w=1600'); }
     .hero-publications { --hero-bg: url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1600'); }
     .hero-photo { --hero-bg: url('https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1600'); }
@@ -102,23 +99,24 @@
   </header>
 
   <main>
-    {{/* 預先計算類別名稱，避免在 HTML 標籤內寫複雜邏輯 */}}
+    {{/* 加強版邏輯：同時檢查網址 (URL) 與標題 (Title) */}}
     {{ $h_class := "" }}
     {{ $url := .RelPermalink | lower }}
+    {{ $title := .Title | lower }}
     
     {{ if .IsHome }}
       {{ $h_class = "is-home-hero" }}
-    {{ else if in $url "about" }}
+    {{ else if or (in $url "about") (in $title "about") (in $title "關於") }}
       {{ $h_class = "hero-about" }}
-    {{ else if in $url "publications" }}
+    {{ else if or (in $url "publications") (in $title "publications") (in $title "成果") }}
       {{ $h_class = "hero-publications" }}
-    {{ else if in $url "photo" }}
+    {{ else if or (in $url "photo") (in $title "photo") (in $title "相片") }}
       {{ $h_class = "hero-photo" }}
-    {{ else if in $url "members" }}
+    {{ else if or (in $url "members") (in $title "members") (in $title "成員") }}
       {{ $h_class = "hero-members" }}
-    {{ else if in $url "courses" }}
+    {{ else if or (in $url "courses") (in $title "courses") (in $title "課程") }}
       {{ $h_class = "hero-courses" }}
-    {{ else if in $url "contact" }}
+    {{ else if or (in $url "contact") (in $title "contact") (in $title "聯絡") }}
       {{ $h_class = "hero-contact" }}
     {{ end }}
 
