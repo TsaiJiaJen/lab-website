@@ -8,8 +8,9 @@
     <style>
         :root {
             --primary-color: #2c3e50;
-            --accent-color: #3498db;
+            --accent-color: #c00000; /* 修改為圖中的紅色 */
             --text-color: #333;
+            --border-gray: #e0e0e0;
         }
 
         body {
@@ -34,7 +35,7 @@
         }
 
         nav {
-            max-width: 1100px;
+            max-width: 1200px; /* 稍微放寬以容納側邊欄版型 */
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -85,7 +86,7 @@
             border: none !important;
             margin: 0;
             text-shadow: 0 2px 15px rgba(0,0,0,0.7);
-            word-break: keep-all; /* 防止中文標題亂斷行 */
+            word-break: keep-all;
         }
 
         .is-home-hero h1 {
@@ -93,10 +94,10 @@
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px; /* 寬度增加，視覺上更接近範例圖 */
             width: 100%;
             margin: -60px auto 50px;
-            padding: 40px 60px;
+            padding: 40px 50px;
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
@@ -104,7 +105,7 @@
             position: relative;
             z-index: 10;
             flex: 1;
-            box-sizing: border-box; /* 確保 padding 不會撐破寬度 */
+            box-sizing: border-box;
         }
 
         .home-style {
@@ -113,108 +114,67 @@
             margin-top: 20px;
         }
 
-        .sub-page-container h1:first-child {
-            display: none;
+        /* --- 新增：側邊選單佈局 --- */
+        .content-wrapper {
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
         }
 
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-            font-size: 0.9rem;
+        .sidebar {
+            width: 220px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 100px; /* 隨滾動固定 */
         }
 
-        /* --- 響應式手機版 RWD 修正 --- */
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column; /* 讓 Logo 與選單垂直排列 */
-                gap: 10px;
-                padding: 10px;
-            }
-
-            .nav-links {
-                gap: 15px;
-                flex-wrap: wrap; /* 選單太長會自動換行 */
-                justify-content: center;
-            }
-
-            .hero-banner h1 {
-                font-size: 1.8rem !important; /* 縮小手機版標題 */
-                padding: 0 10px;
-            }
-
-            .is-home-hero h1 {
-                font-size: 2.2rem !important;
-            }
-
-            .hero-banner p {
-                font-size: 0.95rem;
-                padding: 0 20px;
-            }
-
-            .container {
-                width: 94%;
-                margin: -30px auto 30px; /* 減小負邊距 */
-                padding: 25px 20px; /* 減少手機內距 */
-            }
+        .categories-title {
+            color: var(--accent-color);
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin: 0 0 20px 0;
+            letter-spacing: 1px;
+            border: none !important;
         }
-    </style>
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="{{ "/" | relURL }}" class="logo">{{ .Site.Title }}</a>
-            <div class="nav-links">
-                {{ range .Site.Menus.main }}
-                <a href="{{ .URL | relURL }}">{{ .Name }}</a>
-                {{ end }}
-            </div>
-        </nav>
-    </header>
 
-    <main>
-        {{/* 背景圖邏輯與原本相同 */}}
-        {{ $bg := "https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1600" }}
-        {{ $padding := "140px 20px" }}
-        {{ $url := .RelPermalink | lower }}
-        {{ if .IsHome }}
-            {{ $padding = "160px 20px" }}
-        {{ else if in $url "about" }}
-            {{ $bg = "https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=1600&auto=format&fit=crop" }}
-        {{ else if in $url "photo" }}
-            {{ $bg = "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1600&auto=format&fit=crop" }}
-        {{ else if in $url "publications" }}
-            {{ $bg = "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=1600&auto=format&fit=crop" }}
-        {{ else if in $url "members" }}
-            {{ $bg = "https://images.unsplash.com/photo-1579165466741-7f35e4755660?q=80&w=1600&auto=format&fit=crop" }}
-        {{ else if in $url "courses" }}
-            {{ $bg = "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=1600&auto=format&fit=crop" }}
-        {{ else if in $url "contact" }}
-            {{ $bg = "https://images.unsplash.com/photo-1581595219315-a187dd40c322?q=80&w=1600&auto=format&fit=crop" }}
-        {{ end }}
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
 
-        <section class="hero-banner {{ if .IsHome }}is-home-hero{{ end }}" 
-                 style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ $bg | safeCSS }}'); padding: {{ $padding | safeCSS }};">
-            <div style="max-width: 1100px; width: 100%;">
-                {{ if .IsHome }}
-                <h1>酵素暨生技應用實驗室</h1>
-                <p style="color:white; margin-top:20px; opacity:0.9;">
-                    結合微生物發酵、天然物萃取與生物製程技術，<br>致力於食品、保健與美妝產業之高值化應用。
-                </p>
-                {{ else }}
-                <h1>{{ .Title }}</h1>
-                {{ end }}
-            </div>
-        </section>
+        .sidebar-menu li {
+            border-bottom: 1px solid var(--border-gray);
+        }
 
-        <div class="container {{ if .IsHome }}home-style{{ else }}sub-page-container{{ end }}">
-            {{ block "main" . }}{{ end }}
-        </div>
-    </main>
+        .sidebar-menu li a {
+            display: block;
+            padding: 15px 0;
+            color: #444;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            position: relative;
+        }
 
-    <footer>
-        &copy; {{ now.Format "2006" }} {{ .Site.Title }} | All Rights Reserved
-    </footer>
-</body>
-</html>
+        /* 針對選中狀態的底線紅線效果 */
+        .sidebar-menu li.active {
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .sidebar-menu li.active a,
+        .sidebar-menu li a:hover {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0; /* 防止內容撐破 flex */
+        }
+
+        .main-content h1 {
+            display: block !important; /* 確保內容區標題顯示 */
+            margin-top: 0;
+            font-size: 2
 </html>
