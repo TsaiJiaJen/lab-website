@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode | default "zh-tw" }}">
+<html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
-    
+
+    <title>
+        {{ if .IsHome }}
+            {{ .Site.Title }}
+        {{ else }}
+            {{ .Title }} | {{ .Site.Title }}
+        {{ end }}
+    </title>
+
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -80,4 +88,69 @@
         .content-wrapper {
             display: flex;
             flex-direction: row;
-            padding: 40
+            padding: 40px;
+        }
+
+        main {
+            width: 100%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hero-banner h1 {
+                font-size: 1.6rem;
+                text-align: center;
+                padding: 0 20px;
+            }
+
+            .container {
+                margin: -20px 10px 20px;
+            }
+
+            .content-wrapper {
+                padding: 20px;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <div class="logo">
+            <a href="{{ "/" | relURL }}">{{ .Site.Title }}</a>
+        </div>
+    </nav>
+</header>
+
+<section class="hero-banner">
+    <h1>{{ .Site.Title }}</h1>
+</section>
+
+<div class="container">
+    <div class="content-wrapper">
+        <main>
+            {{ block "main" . }}{{ end }}
+        </main>
+    </div>
+</div>
+
+<footer>
+    © {{ now.Year }} {{ .Site.Title }}
+</footer>
+
+</body>
+</html>
