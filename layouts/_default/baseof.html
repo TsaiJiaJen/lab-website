@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}">
+<html lang="{{ .Site.LanguageCode | default "zh-tw" }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
             --accent-color: #c00000;
             --text-color: #333;
             --border-gray: #e0e0e0;
-            --bg-light: #f8f9fa;
+            --bg-light: #f4f7f9;
         }
 
         body {
@@ -25,7 +25,7 @@
             min-height: 100vh;
         }
 
-        /* Header & Nav */
+        /*導覽列*/
         header {
             background: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -51,59 +51,64 @@
             text-decoration: none;
         }
 
-        /* Hero Banner */
+        /* Banner 區塊 - 修正圖片路徑與顯示 */
         .hero-banner {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/banner.jpg');
+            /* 使用 Hugo 變數確保路徑正確 */
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{{ "images/banner.jpg" | absURL }}');
             background-size: cover;
             background-position: center;
-            height: 300px;
+            height: 350px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            margin-top: 60px;
+            margin-top: 60px; /* 避開固定 Header */
         }
 
-        /* 主要佈局結構 */
+        .hero-banner h1 {
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin: 0;
+        }
+
+        /* 內容容器 */
         .container {
             max-width: 1200px;
-            margin: -60px auto 40px; /* 向上偏移疊在 Banner 上 */
+            margin: -50px auto 40px; /* 向上偏移 */
             background: white;
-            padding: 0;
             border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            min-height: 500px;
             position: relative;
             z-index: 10;
         }
 
-        .home-style {
+        /* 首頁特殊樣式：透明背景 */
+        .is-home .container {
             background: transparent;
             box-shadow: none;
             margin-top: 20px;
         }
 
         .content-wrapper {
-            display: flex;       /* 使用 Flexbox */
-            flex-direction: row; /* 強制水平排列 */
+            display: flex;
+            flex-direction: row; /* 水平排列：左選單，右內容 */
             padding: 40px;
-            gap: 40px;           /* 左右欄間距 */
+            gap: 50px;
         }
 
-        /* 側邊欄 (左側) */
+        /* 左側選單 */
         .sidebar {
             width: 220px;
-            flex-shrink: 0;      /* 防止被擠壓 */
-            position: sticky;
-            top: 100px;
-            height: fit-content;
+            flex-shrink: 0;
         }
 
         .sidebar-menu {
             list-style: none;
             padding: 0;
             margin: 0;
-            border-top: 1px solid var(--border-gray);
+            position: sticky;
+            top: 100px;
         }
 
         .sidebar-menu li {
@@ -112,18 +117,20 @@
 
         .sidebar-menu a {
             display: block;
-            padding: 12px 0;
+            padding: 15px 0;
             color: var(--text-color);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            font-size: 1.1rem;
         }
 
         .sidebar-menu li.active a, .sidebar-menu a:hover {
             color: var(--accent-color);
+            padding-left: 5px;
             font-weight: bold;
         }
 
-        /* 主要內容區 (右側) */
+        /* 右側主要內容 */
         .main-content {
             flex: 1;
             min-width: 0;
@@ -132,48 +139,71 @@
         .main-content h1 {
             margin-top: 0;
             color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
         }
 
         footer {
             background: var(--primary-color);
             color: white;
-            padding: 2rem;
+            padding: 2rem 0;
             text-align: center;
             margin-top: auto;
         }
 
-        /* 響應式：手機版改回上下堆疊 */
+        /* 手機版適應 */
         @media (max-width: 768px) {
             .content-wrapper {
                 flex-direction: column;
+                padding: 20px;
             }
             .sidebar {
                 width: 100%;
+            }
+            .sidebar-menu {
                 position: static;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .sidebar-menu li {
+                border: none;
+            }
+            .sidebar-menu a {
+                background: #eee;
+                padding: 8px 15px;
+                border-radius: 20px;
             }
         }
     </style>
 </head>
-<body>
+<body class="{{ if .IsHome }}is-home{{ end }}">
 
     <header>
         <nav>
-            <div class="logo"><a href="/">{{ .Site.Title }}</a></div>
+            <div class="logo">
+                <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+            </div>
         </nav>
     </header>
 
-    <section class="hero-banner {{ if .IsHome }}is-home-hero{{ end }}">
+    <section class="hero-banner">
         <h1>{{ if .IsHome }}Welcome to Our Lab{{ else }}{{ .Title }}{{ end }}</h1>
     </section>
 
-    <div class="container {{ if .IsHome }}home-style{{ end }}">
+    <div class="container">
         <div class="content-wrapper">
             <aside class="sidebar">
                 <ul class="sidebar-menu">
-                    <li class="{{ if .IsHome }}active{{ end }}"><a href="/">首頁</a></li>
+                    <li class="{{ if .IsHome }}active{{ end }}">
+                        <a href="{{ .Site.BaseURL }}">首頁</a>
+                    </li>
+                    {{ $currentPage := . }}
                     {{ range .Site.Menus.main }}
-                    <li class="{{ if $.HasMenuCurrent "main" . }}active{{ end }}">
-                        <a href="{{ .URL }}">{{ .Name }}</a>
+                    <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
+                        <a href="{{ .URL | absURL }}">{{ .Name }}</a>
                     </li>
                     {{ end }}
                 </ul>
@@ -190,5 +220,4 @@
     </footer>
 
 </body>
-</html>
 </html>
