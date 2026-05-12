@@ -7,8 +7,8 @@
     
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #c00000;
+            --primary-color: #2c3e50; /* 深藍色 */
+            --accent-color: #c00000;  /* 強調紅 */
             --text-color: #333;
             --border-gray: #e0e0e0;
             --bg-light: #f4f7f9;
@@ -51,31 +51,27 @@
             text-decoration: none;
         }
 
-        /* Banner 區塊 - 強制修正圖片路徑以符合 GitHub Pages */
+        /* Banner 區塊 - 改為純色背景 */
         .hero-banner {
-            /* 使用絕對路徑確保在 GitHub Pages 上能顯示 */
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://tsaijiajen.github.io/lab-website/images/banner.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 350px;
+            background: linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%); /* 專業藍色漸層 */
+            height: 250px; /* 縮短高度 */
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            margin-top: 60px; /* 避開固定 Header */
-            border: none !important; /* 確保沒有邊框 */
+            margin-top: 60px;
         }
 
         .hero-banner h1 {
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 2.2rem;
             margin: 0;
+            letter-spacing: 1px;
         }
 
         /* 內容容器 */
         .container {
             max-width: 1200px;
-            margin: -50px auto 40px; /* 向上偏移 */
+            margin: -40px auto 40px; /* 向上偏移 */
             background: white;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -84,21 +80,16 @@
             z-index: 10;
         }
 
-        /* 首頁特殊樣式 */
-        .is-home .container {
-            margin-top: 20px;
-        }
-
         .content-wrapper {
             display: flex;
-            flex-direction: row; /* 水平排列：左選單，右內容 */
+            flex-direction: row;
             padding: 40px;
             gap: 50px;
         }
 
         /* 左側選單 */
         .sidebar {
-            width: 220px;
+            width: 200px;
             flex-shrink: 0;
         }
 
@@ -120,100 +111,6 @@
             color: var(--text-color);
             text-decoration: none;
             transition: all 0.3s;
-            font-size: 1.1rem;
         }
 
-        .sidebar-menu li.active a, .sidebar-menu a:hover {
-            color: var(--accent-color);
-            padding-left: 5px;
-            font-weight: bold;
-        }
-
-        /* 右側主要內容 */
-        .main-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .main-content h1 {
-            margin-top: 0;
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--accent-color);
-            display: inline-block;
-            margin-bottom: 20px;
-            padding-bottom: 5px;
-        }
-
-        footer {
-            background: var(--primary-color);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-            margin-top: auto;
-        }
-
-        /* 手機版適應 */
-        @media (max-width: 768px) {
-            .content-wrapper {
-                flex-direction: column;
-                padding: 20px;
-            }
-            .sidebar {
-                width: 100%;
-            }
-            .sidebar-menu {
-                position: static;
-                display: flex;
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-            .sidebar-menu li {
-                border: none;
-            }
-            .sidebar-menu a {
-                background: #eee;
-                padding: 8px 15px;
-                border-radius: 20px;
-            }
-        }
-    </style>
-</head>
-<body class="{{ if .IsHome }}is-home{{ end }}">
-
-    <header>
-        <nav>
-            <div class="logo">
-                <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
-            </div>
-        </nav>
-    </header>
-
-    <section class="hero-banner">
-        <h1>{{ if .IsHome }}Welcome to Our Lab{{ else }}{{ .Title }}{{ end }}</h1>
-    </section>
-
-    <div class="container">
-        <div class="content-wrapper">
-            <aside class="sidebar">
-                <ul class="sidebar-menu">
-                    {{ $currentPage := . }}
-                    {{ range .Site.Menus.main }}
-                    <li class="{{ if or ($currentPage.IsMenuCurrent "main" .) (and $currentPage.IsHome (eq .URL "/")) }}active{{ end }}">
-                        <a href="{{ .URL | absURL }}">{{ .Name }}</a>
-                    </li>
-                    {{ end }}
-                </ul>
-            </aside>
-
-            <main class="main-content">
-                {{ block "main" . }}{{ end }}
-            </main>
-        </div>
-    </div>
-
-    <footer>
-        <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}</p>
-    </footer>
-
-</body>
-</html>
+        .sidebar-menu li.active a,
