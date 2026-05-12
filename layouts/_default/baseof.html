@@ -14,12 +14,13 @@
     </title>
 
     <style>
+
         :root {
             --primary-color: #2c3e50;
             --accent-color: #c00000;
+            --border-color: #d9d9d9;
+            --bg-color: #f5f5f5;
             --text-color: #333;
-            --border-gray: #e0e0e0;
-            --bg-light: #f4f7f9;
         }
 
         * {
@@ -27,117 +28,94 @@
         }
 
         body {
-            font-family: 'Noto Sans TC', sans-serif;
             margin: 0;
-            padding: 0;
+            font-family: "Noto Sans TC", sans-serif;
+            background: var(--bg-color);
             color: var(--text-color);
-            background-color: var(--bg-light);
+        }
+
+        .layout {
             display: flex;
-            flex-direction: column;
             min-height: 100vh;
         }
 
-        /* Header */
+        /* 左側 sidebar */
 
-        header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            position: fixed;
-            width: 100%;
+        .sidebar {
+            width: 360px;
+            background: #efefef;
+            padding: 50px 30px;
+            border-right: 1px solid #ccc;
+            position: sticky;
             top: 0;
-            z-index: 1000;
+            height: 100vh;
         }
 
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
+        .sidebar-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            letter-spacing: 3px;
+            margin-bottom: 50px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            border-bottom: 2px solid #d0d0d0;
+        }
+
+        .sidebar-menu li a {
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .logo a {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
+            padding: 26px 8px;
             text-decoration: none;
+            color: #444;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: 0.3s;
         }
 
-        /* Menu */
-
-        .menu {
-            list-style: none;
-            display: flex;
-            gap: 24px;
-            margin: 0;
-            padding: 0;
-        }
-
-        .menu li a {
-            text-decoration: none;
-            color: var(--primary-color);
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .menu li a:hover {
+        .sidebar-menu li a:hover {
             color: var(--accent-color);
         }
 
-        /* Hero */
-
-        .hero-banner {
-            background: linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%);
-            height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            margin-top: 70px;
-            text-align: center;
-            padding: 20px;
+        .sidebar-menu li.active a {
+            color: var(--accent-color);
+            border-bottom: 3px solid var(--accent-color);
         }
 
-        .hero-banner h1 {
-            font-size: 2.4rem;
-            margin: 0;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        /* 右側內容 */
+
+        .main-content {
+            flex: 1;
+            padding: 70px 80px;
+            overflow-x: hidden;
         }
 
-        /* Main container */
-
-        .container {
-            max-width: 1200px;
-            margin: -40px auto 40px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            min-height: 500px;
-            position: relative;
-            z-index: 10;
+        .page-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #444;
         }
 
-        .content-wrapper {
-            padding: 40px;
+        .page-divider {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin-bottom: 60px;
         }
 
         main {
-            width: 100%;
+            background: transparent;
         }
-
-        /* Typography */
 
         h1, h2, h3 {
-            color: var(--primary-color);
-        }
-
-        p {
-            line-height: 1.8;
-        }
-
-        a {
-            color: #0066cc;
+            color: #333;
         }
 
         img {
@@ -145,92 +123,89 @@
             height: auto;
         }
 
-        /* Footer */
-
-        footer {
-            text-align: center;
-            padding: 24px;
-            color: #666;
-            margin-top: auto;
+        p {
+            line-height: 1.8;
         }
 
-        /* Mobile */
+        /* 手機版 */
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
 
-            nav {
+            .layout {
                 flex-direction: column;
-                gap: 16px;
-                padding: 1rem;
             }
 
-            .menu {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 16px;
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 30px 20px;
             }
 
-            .hero-banner {
-                height: 200px;
+            .sidebar-title {
+                font-size: 2rem;
+                margin-bottom: 30px;
             }
 
-            .hero-banner h1 {
-                font-size: 1.7rem;
+            .main-content {
+                padding: 30px 20px;
             }
 
-            .container {
-                margin: -20px 12px 24px;
-                border-radius: 12px;
-            }
-
-            .content-wrapper {
-                padding: 24px;
+            .sidebar-menu li a {
+                padding: 18px 5px;
+                font-size: 1rem;
             }
         }
+
     </style>
 </head>
 
 <body>
 
-<header>
-    <nav>
+<div class="layout">
 
-        <div class="logo">
-            <a href="{{ "/" | relURL }}">
-                {{ .Site.Title }}
-            </a>
+    <!-- 左側 -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-title">
+            CATEGORIES
         </div>
 
-        <ul class="menu">
+        <ul class="sidebar-menu">
+
             {{ range .Site.Menus.main }}
-            <li>
+
+            <li class="{{ if $.IsMenuCurrent "main" . }}active{{ end }}">
                 <a href="{{ .URL }}">
                     {{ .Name }}
+                    <span>⌄</span>
                 </a>
             </li>
+
             {{ end }}
+
         </ul>
 
-    </nav>
-</header>
+    </aside>
 
-<section class="hero-banner">
-    <h1>{{ .Site.Title }}</h1>
-</section>
+    <!-- 右側 -->
 
-<div class="container">
-    <div class="content-wrapper">
+    <div class="main-content">
+
+        <div class="page-title">
+            {{ .Title }}
+        </div>
+
+        <hr class="page-divider">
 
         <main>
             {{ block "main" . }}{{ end }}
         </main>
 
     </div>
-</div>
 
-<footer>
-    © {{ now.Year }} {{ .Site.Title }}
-</footer>
+</div>
 
 </body>
 </html>
