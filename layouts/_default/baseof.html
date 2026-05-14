@@ -7,20 +7,14 @@
     
     <style>
         :root {
-            /* 主色調：學術深藍 */
             --primary-color: #1a365d; 
-            /* 點綴色：質感的暗紅（用於重點提醒、活動選單） */
             --accent-color: #c53030;  
-            /* 文字色：深藍灰色，比純黑更有質感 */
             --text-main: #2d3748;    
-            /* 淺灰色：用於邊框 */
-            --border-light: #e2e8f0;  
-            /* 背景色：極淺灰藍 */
             --bg-body: #f7fafc;      
         }
 
         body {
-            font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Noto Sans TC', sans-serif;
             margin: 0;
             padding: 0;
             color: var(--text-main);
@@ -28,13 +22,12 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            line-height: 1.6;
         }
 
-        /* 導覽列 */
+        /* 導覽列固定在頂部 */
         header {
             background: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             position: fixed;
             width: 100%;
             top: 0;
@@ -44,7 +37,7 @@
         nav {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 0.8rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -55,93 +48,70 @@
             font-weight: 700;
             color: var(--primary-color);
             text-decoration: none;
-            letter-spacing: -0.5px;
         }
 
-        /* Banner 改為深藍漸層 */
+        /* Banner 區塊 - 調整高度與間距 */
         .hero-banner {
             background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
-            height: 220px;
+            height: 180px; /* 稍微縮短 */
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            margin-top: 60px;
+            margin-top: 55px; /* 避開 Header */
         }
 
         .hero-banner h1 {
-            font-size: 2.4rem;
-            font-weight: 700;
+            font-size: 2.2rem;
             margin: 0;
-            letter-spacing: 1px;
         }
 
-        /* 內容容器 */
+        /* 主容器 - 移除負邊距，避免內容被遮擋 */
         .container {
-            max-width: 1100px;
-            margin: -30px auto 60px;
+            max-width: 1200px;
+            margin: 20px auto 60px; /* 改為正邊距，讓版面往下掉一點 */
             background: white;
-            border-radius: 8px; /* 質感圓角 */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            overflow: hidden;
-            position: relative;
-            z-index: 10;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            min-height: 400px;
         }
 
         .content-wrapper {
             display: flex;
-            flex-direction: row;
-            padding: 50px;
-            gap: 60px;
+            padding: 40px;
+            gap: 40px;
         }
 
-        /* 側邊欄風格化 */
+        /* 側邊欄 */
         .sidebar {
-            width: 180px;
+            width: 200px;
             flex-shrink: 0;
-        }
-
-        .categories-title {
-            font-size: 0.75rem;
-            color: #718096;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            font-weight: 600;
         }
 
         .sidebar-menu {
             list-style: none;
             padding: 0;
-            margin: 0;
             position: sticky;
-            top: 100px;
+            top: 80px;
         }
 
         .sidebar-menu li {
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
         .sidebar-menu a {
             display: block;
-            padding: 10px 0;
+            padding: 10px 15px;
             color: #4a5568;
             text-decoration: none;
-            transition: all 0.2s ease;
-            font-size: 1.05rem;
-            border-left: 2px solid transparent;
+            border-radius: 6px;
+            transition: 0.2s;
         }
 
         .sidebar-menu li.active a {
+            background: #ebf4ff; /* 淺藍色背景 */
             color: var(--primary-color);
             font-weight: 700;
-            border-left: 3px solid var(--primary-color);
-            padding-left: 15px;
-        }
-
-        .sidebar-menu a:hover {
-            color: var(--primary-color);
-            padding-left: 10px;
         }
 
         /* 主要內容 */
@@ -150,51 +120,41 @@
             min-width: 0;
         }
 
-        .main-content h1 {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-top: 0;
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-        }
-
         footer {
             background: #2d3748;
-            color: #cbd5e0;
-            padding: 3rem 0;
+            color: white;
+            padding: 2rem;
             text-align: center;
-            font-size: 0.9rem;
-        }
-
-        /* 響應式優化 */
-        @media (max-width: 768px) {
-            .content-wrapper {
-                flex-direction: column;
-                padding: 30px 20px;
-                gap: 30px;
-            }
-            .sidebar {
-                width: 100%;
-                border-bottom: 1px solid var(--border-light);
-                padding-bottom: 20px;
-            }
-            .sidebar-menu {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 15px;
-            }
-            .sidebar-menu li.active a {
-                border-left: none;
-                border-bottom: 2px solid var(--primary-color);
-                padding-left: 0;
-            }
+            margin-top: auto;
         }
     </style>
 </head>
 <body>
-
     <header>
-        <nav>
-            <div class="logo">
-                <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
-            </div>
+        <nav><div class="logo"><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></div></nav>
+    </header>
+
+    <section class="hero-banner">
+        <h1>{{ if .IsHome }}張淑微老師實驗室{{ else }}{{ .Title }}{{ end }}</h1>
+    </section>
+
+    <div class="container">
+        <div class="content-wrapper">
+            <aside class="sidebar">
+                <ul class="sidebar-menu">
+                    {{ range .Site.Menus.main }}
+                    <li class="{{ if $.IsMenuCurrent "main" . }}active{{ end }}">
+                        <a href="{{ .URL | absURL }}">{{ .Name }}</a>
+                    </li>
+                    {{ end }}
+                </ul>
+            </aside>
+            <main class="main-content">
+                {{ block "main" . }}{{ end }}
+            </main>
+        </div>
+    </div>
+
+    <footer><p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}</p></footer>
+</body>
+</html>
