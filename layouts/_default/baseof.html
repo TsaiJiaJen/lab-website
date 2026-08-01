@@ -10,12 +10,11 @@
            1. 全域變數與主題色彩（薰衣草紫科技風）
            ========================================== */
         :root {
-            --primary-color: #321E53;    /* 主色：深皇家紫 */
+            --primary-color: #321E53;    /* 主色：深皇家紫（文字與 Logo） */
             --light-purple: #E6E6FA;     /* 老師指定：薰衣草紫 (Lavender) */
-            --accent-color: #06B6D4;     /* 強調色：電光青藍 */
-            --accent-glow: rgba(6, 182, 212, 0.15); /* 點綴光暈 */
+            --purple-border: #D1C4E9;    /* 邊條柔和紫 */
             --text-main: #0F172A;        /* 內文：科技墨藍 */
-            --bg-body: #F0F4F8;          /* 網站背景：科技灰藍（非純白） */
+            --bg-body: #F0F4F8;          /* 網站背景：科技灰藍 */
         }
 
         body {
@@ -60,14 +59,15 @@
             letter-spacing: 0.5px;
         }
 
-        /* Hero Banner：深紫漸層與薰衣草紫光暈 */
+        /* Hero Banner：淺薰衣草紫背景 */
         .hero-banner {
-            background: linear-gradient(135deg, #1E1B4B 0%, #321E53 50%, #4C287A 100%);
+            background: var(--light-purple); /* 換成指定淺紫背景 */
+            border-bottom: 1px solid #DCD0FF;
             height: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #FFFFFF;
+            color: var(--primary-color); /* 深紫文字 */
             margin-top: 55px; /* 避開 Fixed Header */
             text-align: center;
             padding: 0 20px;
@@ -80,8 +80,6 @@
             font-weight: 700;
             margin: 0;
             letter-spacing: 1.5px;
-            /* 給標題淡紫色的霓虹光暈 */
-            text-shadow: 0 0 20px rgba(230, 230, 250, 0.6);
         }
 
         /* 主容器：乾淨簡約 Card 視覺 */
@@ -136,12 +134,12 @@
             background: #F1F5F9;
         }
 
-        /* 選中項目：#E6E6FA 圓角光芒標籤 */
+        /* 選中項目：#E6E6FA 底色標籤 */
         .sidebar-menu li.active a {
-            background: var(--light-purple); /* 使用 #E6E6FA 做底色 */
+            background: var(--light-purple);
             color: var(--primary-color);
             font-weight: 700;
-            border-left: 4px solid #B5A3DF; /* 深一階的薰衣草紫邊條 */
+            border-left: 4px solid var(--purple-border);
             border-top-left-radius: 2px;
             border-bottom-left-radius: 2px;
         }
@@ -209,7 +207,7 @@
 
             .sidebar-menu li.active a {
                 border-left: none;
-                border-bottom: 3px solid #B5A3DF;
+                border-bottom: 3px solid var(--purple-border);
                 border-radius: 6px;
             }
         }
