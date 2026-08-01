@@ -3,26 +3,30 @@ main:
     url: /
     weight: 10
 
+  - name: Principal Investigator 
+    url: /pi/
+    weight: 11
+
   - name: About
     url: /about/
-    weight: 11
+    weight: 12
 
   - name: Publications
     url: /publications/
-    weight: 12
+    weight: 13
 
   - name: Courses
     url: /courses/
-    weight: 13
+    weight: 14
 
   - name: Members
     url: /members/
-    weight: 14
+    weight: 15
 
   - name: Contact
     url: /contact/
-    weight: 15
+    weight: 16
 
   - name: Photo
     url: /photo/
-    weight: 16
+    weight: 17
