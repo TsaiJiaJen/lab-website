@@ -7,13 +7,13 @@
     
     <style>
         /* ==========================================
-           1. 全域變數與主題色彩（極致紫色系）
+           1. 全域變數與主題色彩（方案三：生技薰衣草）
            ========================================== */
         :root {
-            --primary-color: #3b2063; /* 主色：質感深紫 */
-            --accent-color: #8b5cf6;  /* 強調色：亮紫/薰衣草紫 */
-            --text-main: #2d2b32;     /* 內文顏色 */
-            --bg-body: #f3f0f7;       /* 網站大背景：柔和淺紫 */
+            --primary-color: #321E53; /* 主色：深皇家紫 */
+            --accent-color: #059669;  /* 強調色：活力翡翠綠（點綴用） */
+            --text-main: #22222E;     /* 內文顏色：深紫灰 */
+            --bg-body: #F4F1F8;       /* 網站大背景：淺霜紫 */
         }
 
         body {
@@ -31,7 +31,7 @@
         /* 導覽列固定在頂部 */
         header {
             background: white;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 1px 3px rgba(50, 30, 83, 0.08);
             position: fixed;
             width: 100%;
             top: 0;
@@ -55,9 +55,9 @@
             text-decoration: none;
         }
 
-        /* Banner 區塊：優雅紫色漸層 */
+        /* Banner 區塊：深紫漸層背景 */
         .hero-banner {
-            background: linear-gradient(135deg, #2a1b4e 0%, #4a287a 100%);
+            background: linear-gradient(135deg, #24133F 0%, #4C287A 100%);
             height: 180px;
             display: flex;
             align-items: center;
@@ -80,7 +80,7 @@
             margin: 20px auto 60px;
             background: white;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(59, 32, 99, 0.05);
+            box-shadow: 0 4px 15px rgba(50, 30, 83, 0.05);
             min-height: 400px;
             box-sizing: border-box;
         }
@@ -118,11 +118,12 @@
             transition: 0.2s;
         }
 
-        /* 側邊欄當前選中項目（淡紫底） */
+        /* 側邊欄當前選中項目（淡紫底 + 左側翡翠綠條點綴） */
         .sidebar-menu li.active a {
-            background: #f0eaf8; 
+            background: #E8E2F1; 
             color: var(--primary-color);
             font-weight: 700;
+            border-left: 4px solid var(--accent-color);
         }
 
         /* 主要內容 */
@@ -132,7 +133,7 @@
         }
 
         footer {
-            background: #231638; /* 極深紫頁尾 */
+            background: #1B0F2E; /* 暗夜紫頁尾 */
             color: white;
             padding: 2rem;
             text-align: center;
@@ -173,7 +174,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 gap: 8px;
-                border-bottom: 1px solid #f0eaf8;
+                border-bottom: 1px solid #E8E2F1;
                 padding-bottom: 15px;
             }
 
@@ -184,6 +185,11 @@
             .sidebar-menu a {
                 padding: 6px 12px;
                 font-size: 0.9rem;
+            }
+
+            .sidebar-menu li.active a {
+                border-left: none;
+                border-bottom: 3px solid var(--accent-color);
             }
         }
     </style>
