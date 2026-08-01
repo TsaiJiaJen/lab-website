@@ -7,12 +7,13 @@
     
     <style>
         /* ==========================================
-           1. 全域變數與主題色彩（薰衣草紫科技風）
+           1. 全域變數與主題色彩
            ========================================== */
         :root {
             --primary-color: #321E53;    /* 主色：深皇家紫（文字與 Logo） */
-            --light-purple: #E6E6FA;     /* 老師指定：薰衣草紫 (Lavender) */
-            --purple-border: #D1C4E9;    /* 邊條柔和紫 */
+            --banner-bg: #A020F0;        /* Banner 指定色：紫色 */
+            --container-bg: #E6E6FA;     /* 主容器指定色：薰衣草紫 */
+            --purple-border: #D1C4E9;    /* 柔和邊框紫 */
             --text-main: #0F172A;        /* 內文：科技墨藍 */
             --bg-body: #F0F4F8;          /* 網站背景：科技灰藍 */
         }
@@ -59,15 +60,14 @@
             letter-spacing: 0.5px;
         }
 
-        /* Hero Banner：淺薰衣草紫背景 */
+        /* Hero Banner：#A020F0 背景 */
         .hero-banner {
-            background: var(--light-purple); /* 換成指定淺紫背景 */
-            border-bottom: 1px solid #DCD0FF;
+            background-color: var(--banner-bg); /* #A020F0 */
             height: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-color); /* 深紫文字 */
+            color: #FFFFFF; /* 白色標題文字 */
             margin-top: 55px; /* 避開 Fixed Header */
             text-align: center;
             padding: 0 20px;
@@ -82,15 +82,15 @@
             letter-spacing: 1.5px;
         }
 
-        /* 主容器：乾淨簡約 Card 視覺 */
+        /* 主容器：#E6E6FA 背景 */
         .container {
             max-width: 1200px;
             width: 92%;
             margin: 30px auto 60px;
-            background: #FFFFFF;
+            background-color: var(--container-bg); /* #E6E6FA */
             border-radius: 16px;
-            border: 1px solid #E2E8F0;
-            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.04);
+            border: 1px solid #DCD0FF;
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
             min-height: 400px;
             box-sizing: border-box;
         }
@@ -122,7 +122,7 @@
         .sidebar-menu a {
             display: block;
             padding: 10px 16px;
-            color: #64748B;
+            color: #475569;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 500;
@@ -131,17 +131,18 @@
 
         .sidebar-menu a:hover {
             color: var(--primary-color);
-            background: #F1F5F9;
+            background: rgba(255, 255, 255, 0.6);
         }
 
-        /* 選中項目：#E6E6FA 底色標籤 */
+        /* 選中項目標籤 */
         .sidebar-menu li.active a {
-            background: var(--light-purple);
+            background: #FFFFFF;
             color: var(--primary-color);
             font-weight: 700;
-            border-left: 4px solid var(--purple-border);
+            border-left: 4px solid var(--banner-bg);
             border-top-left-radius: 2px;
             border-bottom-left-radius: 2px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         /* 主要內容區 */
@@ -192,7 +193,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 gap: 8px;
-                border-bottom: 1px solid #E2E8F0;
+                border-bottom: 1px solid #DCD0FF;
                 padding-bottom: 15px;
             }
 
@@ -207,7 +208,7 @@
 
             .sidebar-menu li.active a {
                 border-left: none;
-                border-bottom: 3px solid var(--purple-border);
+                border-bottom: 3px solid var(--banner-bg);
                 border-radius: 6px;
             }
         }
