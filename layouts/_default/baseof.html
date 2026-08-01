@@ -7,17 +7,18 @@
     
     <style>
         /* ==========================================
-           1. 全域變數與主題色彩（方案三：生技薰衣草）
+           1. 全域變數與主題色彩（現代生技科技風）
            ========================================== */
         :root {
-            --primary-color: #321E53; /* 主色：深皇家紫 */
-            --accent-color: #059669;  /* 強調色：活力翡翠綠（點綴用） */
-            --text-main: #22222E;     /* 內文顏色：深紫灰 */
-            --bg-body: #F4F1F8;       /* 網站大背景：淺霜紫 */
+            --primary-color: #1E1B4B;    /* 主色：深靛紫 */
+            --accent-color: #06B6D4;     /* 強調色：電光青藍 */
+            --accent-glow: rgba(6, 182, 212, 0.15); /* 點綴光暈 */
+            --text-main: #0F172A;        /* 內文：科技墨藍 */
+            --bg-body: #F8FAFC;          /* 網站背景：冷調微淺灰 */
         }
 
         body {
-            font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
             padding: 0;
             color: var(--text-main);
@@ -28,10 +29,12 @@
             line-height: 1.6;
         }
 
-        /* 導覽列固定在頂部 */
+        /* 導覽列：毛玻璃微透質感 */
         header {
-            background: white;
-            box-shadow: 0 1px 3px rgba(50, 30, 83, 0.08);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
             position: fixed;
             width: 100%;
             top: 0;
@@ -49,38 +52,45 @@
         }
 
         .logo a {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--primary-color);
             text-decoration: none;
+            letter-spacing: 0.5px;
         }
 
-        /* Banner 區塊：深紫漸層背景 */
+        /* Hero Banner：深邃星空科技漸層 */
         .hero-banner {
-            background: linear-gradient(135deg, #24133F 0%, #4C287A 100%);
+            background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #312E81 100%);
             height: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            margin-top: 55px; /* 避開 Header */
+            color: #FFFFFF;
+            margin-top: 55px; /* 避開 Fixed Header */
             text-align: center;
             padding: 0 20px;
+            position: relative;
+            overflow: hidden;
         }
 
         .hero-banner h1 {
             font-size: 2.2rem;
+            font-weight: 700;
             margin: 0;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
         }
 
-        /* 主容器 */
+        /* 主容器：乾淨簡約 Card 視覺 */
         .container {
             max-width: 1200px;
             width: 92%;
-            margin: 20px auto 60px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(50, 30, 83, 0.05);
+            margin: 30px auto 60px;
+            background: #FFFFFF;
+            border-radius: 16px;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.04);
             min-height: 400px;
             box-sizing: border-box;
         }
@@ -93,7 +103,7 @@
 
         /* 側邊欄 */
         .sidebar {
-            width: 200px;
+            width: 220px;
             flex-shrink: 0;
         }
 
@@ -102,46 +112,56 @@
             padding: 0;
             margin: 0;
             position: sticky;
-            top: 80px;
+            top: 90px;
         }
 
         .sidebar-menu li {
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
 
         .sidebar-menu a {
             display: block;
-            padding: 10px 15px;
-            color: #555;
+            padding: 10px 16px;
+            color: #64748B;
             text-decoration: none;
-            border-radius: 6px;
-            transition: 0.2s;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
 
-        /* 側邊欄當前選中項目（淡紫底 + 左側翡翠綠條點綴） */
-        .sidebar-menu li.active a {
-            background: #E8E2F1; 
+        .sidebar-menu a:hover {
             color: var(--primary-color);
-            font-weight: 700;
-            border-left: 4px solid var(--accent-color);
+            background: #F1F5F9;
         }
 
-        /* 主要內容 */
+        /* 選中項目：亮青藍圓角光芒標籤 */
+        .sidebar-menu li.active a {
+            background: var(--accent-glow);
+            color: #0891B2;
+            font-weight: 700;
+            border-left: 3px solid var(--accent-color);
+            border-top-left-radius: 2px;
+            border-bottom-left-radius: 2px;
+        }
+
+        /* 主要內容區 */
         .main-content {
             flex: 1;
             min-width: 0;
         }
 
         footer {
-            background: #1B0F2E; /* 暗夜紫頁尾 */
-            color: white;
+            background: #0F172A;
+            color: #94A3B8;
             padding: 2rem;
             text-align: center;
             margin-top: auto;
+            font-size: 0.9rem;
+            border-top: 1px solid #1E293B;
         }
 
         /* ==========================================
-           2. 手機版響應式微調 (RWD 解決畫面壓縮)
+           2. 手機版響應式微調 (RWD)
            ========================================== */
         @media (max-width: 768px) {
             .hero-banner {
@@ -157,7 +177,6 @@
                 margin: 15px auto 30px;
             }
 
-            /* 將原本左右併排的「側邊選單」與「內容」改為上下單欄 */
             .content-wrapper {
                 flex-direction: column;
                 padding: 20px;
@@ -168,13 +187,12 @@
                 width: 100%;
             }
 
-            /* 手機版側邊選單改為平舖橫向選單 */
             .sidebar-menu {
                 position: static;
                 display: flex;
                 flex-wrap: wrap;
                 gap: 8px;
-                border-bottom: 1px solid #E8E2F1;
+                border-bottom: 1px solid #E2E8F0;
                 padding-bottom: 15px;
             }
 
@@ -189,7 +207,8 @@
 
             .sidebar-menu li.active a {
                 border-left: none;
-                border-bottom: 3px solid var(--accent-color);
+                border-bottom: 2px solid var(--accent-color);
+                border-radius: 6px;
             }
         }
     </style>
