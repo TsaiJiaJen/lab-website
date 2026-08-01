@@ -6,7 +6,7 @@ date: 2026-08-01
 # 張淑微 博士 (Dr. Shu-Wei Chang)
 
 ![張淑微老師照片](/images/pi-photo.jpg) 
-> *(提示：可將老師的照片放在 static/images/ 目錄下)*
+
 
 * **現職：** 大葉大學 藥用植物與食品保健學系 副教授 / 實驗室主持人
 * **信箱：** swchang@mail.dyu.edu.tw
